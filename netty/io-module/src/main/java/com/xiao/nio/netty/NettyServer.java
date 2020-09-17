@@ -42,6 +42,11 @@ public class NettyServer {
                 });
         //绑定一个端口并且同步
         ChannelFuture sync = bootstrap.bind(6666).sync();
+        sync.addListener((future) -> {
+            if(future.isSuccess()) {
+                System.out.println("绑定端口 6666 成功....");
+            }
+        });
         //对关闭通道进行监听
         sync.channel().closeFuture().sync();
     }
