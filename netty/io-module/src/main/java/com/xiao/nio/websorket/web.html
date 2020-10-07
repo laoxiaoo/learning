@@ -1,0 +1,49 @@
+﻿<html>
+<head>
+    <title>Test</title>
+    <script type="text/javascript">
+        var socket;
+        if(window.WebSocket) {
+            socket= new WebSocket("ws://127.0.0.1/hello")
+            
+			socket.onmessage = function (evt) { 
+                  var rt = document.getElementById("responseText")
+					rt.value = rt.value+ "\n" + evt.data
+            };
+            //连接开启
+            socket.onopen = function (ev) {
+                var rt = document.getElementById("responseText")
+                rt.value = "连接开启了...."
+            }
+
+            //连接关闭
+            socket.onclose = function (ev) {
+                var rt = document.getElementById("responseText")
+                rt.value =  rt.value + "\n"+ "连接关闭...."
+            }
+        } else {
+            alert("浏览器不支持 websocket")
+        }
+        function send() {
+            var message = document.getElementById("message").value;
+            if(! window.socket) {
+                //判断socket是否创建 好
+                return;
+            }
+            if(socket.readyState == WebSocket.OPEN) {
+                socket.send(message)
+            }
+        }
+    </script>
+</head>
+<body>
+<textarea id="message" style="height: 300px; width: 300px">
+</textarea>
+<input type="button" value="推送消息" onclick="send()"/>
+<textarea  id="responseText" style="height: 300px; width: 300px">
+
+</textarea>
+</body>
+</html>
+</html>
+</html>
