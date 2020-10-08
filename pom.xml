@@ -11,6 +11,7 @@
     <modules>
         <module>netty</module>
         <module>netty</module>
+        <module>esearch</module>
     </modules>
 
     <properties>
@@ -20,10 +21,26 @@
         <slf4j-api.version>1.7.26</slf4j-api.version>
         <hutool.version>5.3.10</hutool.version>
         <netty.version>4.1.51.Final</netty.version>
+        <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
+        <elasticsearch.version>7.9.2</elasticsearch.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
