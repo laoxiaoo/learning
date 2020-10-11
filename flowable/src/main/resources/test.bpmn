@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+    xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:flowable="http://flowable.org/bpmn"
+    xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+    xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+    xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/test">
+    <process id="process3" name="process3" isExecutable="true">
+        <startEvent id="start-test" name="start-test-name"></startEvent>
+        <sequenceFlow id="start-test-line" name="start-test-line-name" sourceRef="start-test" targetRef="userTask-test"></sequenceFlow>
+        <userTask id="userTask-test" name="userTask-test-name"></userTask>
+        <sequenceFlow id="end-test-line" name="end-test-line-name" sourceRef="userTask-test" targetRef="endEvent-test"></sequenceFlow>
+        <endEvent id="endEvent-test" name="endEvent-test-name"></endEvent>
+    </process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_process3">
+        <bpmndi:BPMNPlane bpmnElement="process3" id="BPMNPlane_process3"></bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</definitions>

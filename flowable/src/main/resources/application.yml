@@ -1,0 +1,13 @@
+
+flowable:
+  #关闭定时任务JOB
+  async-executor-activate: false
+  #将databaseSchemaUpdate设置为false。当Flowable发现库与数据库表结构不一致时，不会自动将数据库表结构升级至新版本。
+  database-schema-update: true
+
+
+#spring:
+#  datasource:
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://192.168.1.134:3306/flowable_test?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
