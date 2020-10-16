@@ -105,9 +105,7 @@ public class TestPub {
 
         //查看流程绘制情况
         BpmnXMLConverter bpmnXMLConverter=new BpmnXMLConverter();
-
         byte[] convertToXML = bpmnXMLConverter.convertToXML(bpmnModel);
-
         String bytes=new String(convertToXML);
 
         System.out.println(bytes);
