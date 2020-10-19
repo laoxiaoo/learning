@@ -1,7 +1,7 @@
 node {
     def branch = '*/master'
-    def remote_directory = '/home/es-jd-1.0-SNAPSHOT.jar'
-    def source_files = 'esearch/es-jd/target/es-jd-1.0-SNAPSHOT.jar'
+    def remote_directory = '/home/jar'
+    def source_files = 'esearch/es-jd/target/**'
 
     stage('pull code') { // for display purposes
         checkout([$class: 'GitSCM', branches: [[name: "${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'edeabfcb-f7c2-486c-8ba7-e722516e6a0b', url: 'https://gitee.com/lonelyxiao/learning.git']]])
