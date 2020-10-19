@@ -1,6 +1,6 @@
 node {
     def branch = '*/master'
-    def remote_directory = '/home'
+    def remote_directory = ''
     def source_files = 'esearch/es-jd/target/es-jd-1.0-SNAPSHOT.jar'
 
     stage('pull code') { // for display purposes
