@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project [
+        <!ELEMENT project (modelVersion|groupId|artifactId|packaging|version|modules|properties|dependencyManagement)*>
+        <!ATTLIST project
+                xmlns CDATA #REQUIRED
+                xmlns:xsi CDATA #REQUIRED
+                xsi:schemaLocation CDATA #REQUIRED>
+        <!ELEMENT modelVersion (#PCDATA)>
+        <!ELEMENT groupId (#PCDATA)>
+        <!ELEMENT artifactId (#PCDATA)>
+        <!ELEMENT packaging (#PCDATA)>
+        <!ELEMENT version (#PCDATA)>
+        <!ELEMENT modules (module)*>
+        <!ELEMENT module (#PCDATA)>
+        <!ELEMENT properties (project.build.sourceEncoding|maven.compiler.source|maven.compiler.target|slf4j-api.version|hutool.version|netty.version|spring.boot.version|elasticsearch.version|flowable.version)*>
+        <!ELEMENT project.build.sourceEncoding (#PCDATA)>
+        <!ELEMENT maven.compiler.source (#PCDATA)>
+        <!ELEMENT maven.compiler.target (#PCDATA)>
+        <!ELEMENT slf4j-api.version (#PCDATA)>
+        <!ELEMENT hutool.version (#PCDATA)>
+        <!ELEMENT netty.version (#PCDATA)>
+        <!ELEMENT spring.boot.version (#PCDATA)>
+        <!ELEMENT elasticsearch.version (#PCDATA)>
+        <!ELEMENT flowable.version (#PCDATA)>
+        <!ELEMENT dependencyManagement (dependencies)*>
+        <!ELEMENT dependencies (dependency)*>
+        <!ELEMENT dependency (groupId|artifactId|version|type|scope)*>
+        <!ELEMENT type (#PCDATA)>
+        <!ELEMENT scope (#PCDATA)>
+        ]>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -12,6 +41,7 @@
         <module>netty</module>
         <module>esearch</module>
         <module>flowable</module>
+        <module>mybatis</module>
     </modules>
 
     <properties>
@@ -71,6 +101,12 @@
                 <groupId>org.flowable</groupId>
                 <artifactId>flowable-spring-boot-starter</artifactId>
                 <version>${flowable.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>mybatis</artifactId>
+                        <groupId>org.mybatis</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.h2database</groupId>
@@ -81,7 +117,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.49</version>
+                <version>8.0.16</version>
             </dependency>
 
             <dependency>
@@ -95,7 +131,6 @@
                 <artifactId>redisson</artifactId>
                 <version>3.13.5</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 </project>

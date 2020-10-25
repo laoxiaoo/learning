@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @program: learning
- * @description: TODO
- * @author: lonely xiao
+ * @description: 流程部署模块
+ * @author: lonely X
  * @create: 2020-10-11 11:46
  */
 @SpringBootApplication
