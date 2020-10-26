@@ -1,6 +1,7 @@
 package com.xiao;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
@@ -31,6 +32,29 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
+ * 1 获取任务列表
+ *
+ * 1）获取候选人的任务列表
+ *
+ * TaskService taskService = processEngine.getTaskService();
+ * List<Task> tasks = taskService.createTaskQuery().taskCandidateUser("kermit").list();
+ * 2）如果任务分配给了某一组，查询某一组的任务列表
+ *
+ * TaskService taskService = processEngine.getTaskService();
+ * List<Task> tasks = taskService.createTaskQuery().taskCandidateGroup("accountancy").list();
+ *
+ *
+ * 2 claim the task，当任务分配给了某一组人员时，需要该组人员进行抢占。抢到了就将该任务给谁处理，其他人不能处理。
+ *
+ * taskService.claim(task.getId(), "fozzie");
+ * 此时，该任务已经成为个人的了，可以通过以下接口进行查询该人的待办
+ *
+ * List<Task> tasks = taskService.createTaskQuery().taskAssignee("fozzie").list();
+ *
+ *
+ * 3 完成 Task，当他将任务做完后可以将该Task结束，API如下
+ *
+ * taskService.complete(task.getId());
  * @program: learning
  * @description: TODO
  * @author: lonely xiao
@@ -79,7 +103,6 @@ public class AddFlow {
             JSONObject node = nodeList.getJSONObject(i);
             if("task".equals(node.getStr("type"))) {
                 startEvent=new StartEvent();
-
                 startEvent.setId(node.getStr("id"));
                 startEvent.setName(node.getStr("name"));
             }
@@ -92,6 +115,7 @@ public class AddFlow {
 
             if("timer".equals(node.getStr("type"))) {
                 UserTask userTask=new UserTask();
+                userTask.setCandidateUsers(CollUtil.toList("1", "2", "3"));
                 userTask.setId(node.getStr("id"));
                 userTask.setName(node.getStr("name"));
                 userTasks.add(userTask);
@@ -202,15 +226,15 @@ public class AddFlow {
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processId);
         Task task = taskService.createTaskQuery().singleResult();
 
-        System.out.println("当前任务：" + task.getName());
+        System.out.println("当前任务：" + task.toString());
         Map vars = new HashMap<>();
         vars.put("days", 7);
         taskService.complete(task.getId(), vars);
-
-
         Task task2 = taskService.createTaskQuery().singleResult();
-        System.out.println("当前任务：" + task2.getName());
-
+        System.out.println("当前任务：" + task2.toString());
+        //taskService.complete(task2.getId());
+        List<Task> tasks = taskService.createTaskQuery().taskCandidateUser("1").list();
+        System.out.println("当前用户的任务列表："+ ArrayUtil.toString(tasks));
 
     }
 }
