@@ -6,12 +6,14 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.xiao.listener.CommonTaskListener;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
 import org.flowable.bpmn.model.*;
 import org.flowable.bpmn.model.Process;
 import org.flowable.engine.RepositoryService;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
+import org.flowable.engine.delegate.TaskListener;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
@@ -79,6 +81,9 @@ public class AddFlow {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private CommonTaskListener commonTaskListener;
+
 
     String processId= "process3";
 
@@ -111,6 +116,7 @@ public class AddFlow {
                 endEvent=new EndEvent();
                 endEvent.setId(node.getStr("id"));
                 endEvent.setName(node.getStr("name"));
+
             }
 
             if("timer".equals(node.getStr("type"))) {
@@ -118,6 +124,13 @@ public class AddFlow {
                 userTask.setCandidateUsers(CollUtil.toList("1", "2", "3"));
                 userTask.setId(node.getStr("id"));
                 userTask.setName(node.getStr("name"));
+                FlowableListener flowableListener = new FlowableListener();
+                flowableListener.setEvent(CommonTaskListener.EVENTNAME_COMPLETE);
+                flowableListener.setInstance(commonTaskListener);
+                flowableListener.setCustomPropertiesResolverImplementationType("3");
+                flowableListener.setImplementation("com.xiao.listener.CommonTaskListener");
+                flowableListener.setImplementationType("CommonTaskListener");
+                userTask.setTaskListeners(CollUtil.toList(flowableListener));
                 userTasks.add(userTask);
             }
         }
@@ -178,6 +191,8 @@ public class AddFlow {
             userTask.setIncomingFlows(in.get(userTask.getId()));
             //设置出去的先
             userTask.setOutgoingFlows(CollUtil.toList(out.get(userTask.getId()).get(0)));
+            ExtensionElement extensionElement = new ExtensionElement();
+
             process.addFlowElement(userTask);
         });
 

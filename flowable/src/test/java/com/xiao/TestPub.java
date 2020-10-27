@@ -149,7 +149,7 @@ public class TestPub {
     }
 
     @Test
-    public  void getTask(){
+    public  void getTask() {
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processId);
 
         List<Task> list = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
