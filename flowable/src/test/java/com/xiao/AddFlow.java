@@ -10,13 +10,16 @@ import com.xiao.listener.CommonTaskListener;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
 import org.flowable.bpmn.model.*;
 import org.flowable.bpmn.model.Process;
+import org.flowable.engine.HistoryService;
 import org.flowable.engine.RepositoryService;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.delegate.TaskListener;
+import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
+import org.flowable.task.api.history.HistoricTaskInstance;
 import org.flowable.validation.ProcessValidator;
 import org.flowable.validation.ProcessValidatorFactory;
 import org.flowable.validation.ValidationError;
@@ -82,6 +85,9 @@ public class AddFlow {
     private TaskService taskService;
 
     @Autowired
+    private HistoryService historyService;
+
+    @Autowired
     private CommonTaskListener commonTaskListener;
 
 
@@ -126,10 +132,9 @@ public class AddFlow {
                 userTask.setName(node.getStr("name"));
                 FlowableListener flowableListener = new FlowableListener();
                 flowableListener.setEvent(CommonTaskListener.EVENTNAME_COMPLETE);
-                flowableListener.setInstance(commonTaskListener);
-                flowableListener.setCustomPropertiesResolverImplementationType("3");
-                flowableListener.setImplementation("com.xiao.listener.CommonTaskListener");
-                flowableListener.setImplementationType("CommonTaskListener");
+                //设置监听
+                flowableListener.setImplementation("${commonTaskListener}");
+                flowableListener.setImplementationType("delegateExpression");
                 userTask.setTaskListeners(CollUtil.toList(flowableListener));
                 userTasks.add(userTask);
             }
@@ -237,19 +242,41 @@ public class AddFlow {
         if (deployment == null){
             System.out.println("没有该流程");
         }
-
+        //流程部署id
+        String parentDeploymentId = deployment.getParentDeploymentId();
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processId);
-        Task task = taskService.createTaskQuery().singleResult();
+        //获取流程定义id
+        String definitionId = processInstance.getProcessDefinitionId();
+        //流程实例id
+        String processInstanceId = processInstance.getProcessInstanceId();
 
+        Task task = taskService.createTaskQuery().singleResult();
+        task.setAssignee("1");
         System.out.println("当前任务：" + task.toString());
+        this.getTaskHistory(processInstanceId);
         Map vars = new HashMap<>();
         vars.put("days", 7);
         taskService.complete(task.getId(), vars);
         Task task2 = taskService.createTaskQuery().singleResult();
         System.out.println("当前任务：" + task2.toString());
+        this.getAssignee(processInstanceId);
+        this.getTaskHistory(processInstanceId);
         //taskService.complete(task2.getId());
         List<Task> tasks = taskService.createTaskQuery().taskCandidateUser("1").list();
         System.out.println("当前用户的任务列表："+ ArrayUtil.toString(tasks));
-
     }
+
+
+    public void getTaskHistory(String processInstanceId) {
+        List<HistoricTaskInstance> list = historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstanceId).list();
+        list.stream().forEach(historicTaskInstance -> {
+            System.out.println("历史流程："+historicTaskInstance.getName()+" "+ historicTaskInstance.getAssignee());
+        });
+    }
+
+    public void getAssignee(String processInstanceId) {
+        Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
+        System.out.println("当前实例任务:"+task.toString());
+    }
+
 }

@@ -16,5 +16,7 @@ public class CommonTaskListener implements TaskListener {
     @Override
     public void notify(DelegateTask delegateTask) {
         System.out.println("监听执行："+delegateTask.toString());
+        delegateTask.setAssignee("1");
+        //delegateTask.setOwner("2");
     }
 }
