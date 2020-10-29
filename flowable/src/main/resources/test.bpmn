@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/test">
-    <process id="process3" name="process3" isExecutable="true">
-        <sequenceFlow id="line_85qrlz" name="line_85qrlz" sourceRef="nodeStart" targetRef="hsh5hukxxm"></sequenceFlow>
-        <sequenceFlow id="line_gqdqeo" name="line_gqdqeo" sourceRef="gateWay6056t3" targetRef="z5mc3ikea">
-            <conditionExpression xsi:type="tFormalExpression"><![CDATA[days>5]]></conditionExpression>
-        </sequenceFlow>
-        <sequenceFlow id="line_ia02g4" name="line_ia02g4" sourceRef="gateWay6056t3" targetRef="pme8oslt4u">
-            <conditionExpression xsi:type="tFormalExpression"><![CDATA[days<=5]]></conditionExpression>
-        </sequenceFlow>
-        <sequenceFlow id="line_x7pjqu" name="line_x7pjqu" sourceRef="z5mc3ikea" targetRef="nodeEnd"></sequenceFlow>
-        <sequenceFlow id="line_dgam7n" name="line_dgam7n" sourceRef="pme8oslt4u" targetRef="nodeEnd"></sequenceFlow>
-        <sequenceFlow id="line_8qmedm" name="line_8qmedm" sourceRef="hsh5hukxxm" targetRef="gateWay6056t3"></sequenceFlow>
-        <exclusiveGateway id="gateWay6056t3" name="gateWay6056t3"></exclusiveGateway>
-        <userTask id="hsh5hukxxm" name="流程节点2"></userTask>
-        <userTask id="z5mc3ikea" name="流程节点"></userTask>
-        <userTask id="pme8oslt4u" name="流程节点1"></userTask>
-        <startEvent id="nodeStart" name="流程发起节点"></startEvent>
-        <endEvent id="nodeEnd" name="流程结束"></endEvent>
-    </process>
-    <bpmndi:BPMNDiagram id="BPMNDiagram_process3">
-        <bpmndi:BPMNPlane bpmnElement="process3" id="BPMNPlane_process3"></bpmndi:BPMNPlane>
-    </bpmndi:BPMNDiagram>
+  <process id="process3" name="process3" isExecutable="true">
+    <sequenceFlow id="line_ot3emf" name="line_ot3emf" sourceRef="nodeStart" targetRef="hsh5hukxxm"></sequenceFlow>
+    <sequenceFlow id="line_ptdju1" name="line_ptdju1" sourceRef="gateWayzd1jen" targetRef="z5mc3ikea">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${days>5}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="line_ubvuf4" name="line_ubvuf4" sourceRef="gateWayzd1jen" targetRef="pme8oslt4u">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${days<=5}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="line_5zgw2u" name="line_5zgw2u" sourceRef="z5mc3ikea" targetRef="nodeEnd"></sequenceFlow>
+    <sequenceFlow id="line_heutaq" name="line_heutaq" sourceRef="pme8oslt4u" targetRef="nodeEnd"></sequenceFlow>
+    <sequenceFlow id="line_ubpy65" name="line_ubpy65" sourceRef="hsh5hukxxm" targetRef="gateWayzd1jen"></sequenceFlow>
+    <exclusiveGateway id="gateWayzd1jen" name="gateWayzd1jen"></exclusiveGateway>
+    <userTask id="hsh5hukxxm" name="流程节点2">
+      <extensionElements>
+        <flowable:taskListener event="complete" delegateExpression="${completeTaskListener}"></flowable:taskListener>
+        <flowable:taskListener event="create" delegateExpression="${createTaskListener}"></flowable:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="z5mc3ikea" name="流程节点">
+      <extensionElements>
+        <flowable:taskListener event="complete" delegateExpression="${completeTaskListener}"></flowable:taskListener>
+        <flowable:taskListener event="create" delegateExpression="${createTaskListener}"></flowable:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="pme8oslt4u" name="流程节点1">
+      <extensionElements>
+        <flowable:taskListener event="complete" delegateExpression="${completeTaskListener}"></flowable:taskListener>
+        <flowable:taskListener event="create" delegateExpression="${createTaskListener}"></flowable:taskListener>
+      </extensionElements>
+    </userTask>
+    <startEvent id="nodeStart" name="流程发起节点"></startEvent>
+    <endEvent id="nodeEnd" name="流程结束"></endEvent>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_process3">
+    <bpmndi:BPMNPlane bpmnElement="process3" id="BPMNPlane_process3"></bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
 </definitions>

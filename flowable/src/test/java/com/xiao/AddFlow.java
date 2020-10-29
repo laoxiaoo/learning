@@ -6,7 +6,9 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.xiao.flow.BpmnModelBuilder;
 import com.xiao.listener.CommonTaskListener;
+import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
 import org.flowable.bpmn.model.*;
 import org.flowable.bpmn.model.Process;
@@ -67,11 +69,12 @@ import java.util.stream.Stream;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class AddFlow {
 
     //private final String flow = "{\"name\":\"流程B\",\"nodeList\":[{\"id\":\"j64q7773on\",\"name\":\"数据接入\",\"type\":\"timer\",\"left\":\"242px\",\"top\":\"201px\",\"ico\":\"el-icon-time\",\"state\":\"success\"},{\"id\":\"om6o6k1sci\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"835px\",\"top\":\"244px\",\"ico\":\"el-icon-caret-right\",\"state\":\"success\"},{\"id\":\"fzdij1skj\",\"name\":\"数据接入1\",\"type\":\"timer\",\"left\":\"457px\",\"top\":\"173px\",\"ico\":\"el-icon-time\",\"state\":\"success\"},{\"id\":\"iq2vj993k\",\"name\":\"数据接入2\",\"type\":\"timer\",\"left\":\"493px\",\"top\":\"308px\",\"ico\":\"el-icon-time\",\"state\":\"success\"},{\"id\":\"f5jbsmgks\",\"name\":\"接口调用\",\"type\":\"task\",\"left\":\"40px\",\"top\":\"203px\",\"ico\":\"el-icon-odometer\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"f5jbsmgks\",\"to\":\"j64q7773on\"},{\"from\":\"j64q7773on\",\"to\":\"fzdij1skj\"},{\"from\":\"fzdij1skj\",\"to\":\"iq2vj993k\"},{\"from\":\"iq2vj993k\",\"to\":\"om6o6k1sci\"}]}";
 
-    private final String flow = "{\"name\":\"流程\",\"nodeList\":[{\"id\":\"nodeStart\",\"name\":\"流程发起节点\",\"type\":\"task\",\"left\":\"84px\",\"top\":\"248px\",\"ico\":\"icon-flow-start green\"},{\"id\":\"nodeEnd\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"1139px\",\"top\":\"258px\",\"ico\":\"icon-flow-end red\"},{\"id\":\"hsh5hukxxm\",\"name\":\"流程节点2\",\"type\":\"timer\",\"left\":\"492px\",\"top\":\"249px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"z5mc3ikea\",\"name\":\"流程节点\",\"type\":\"timer\",\"left\":\"684px\",\"top\":\"157px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"pme8oslt4u\",\"name\":\"流程节点1\",\"type\":\"timer\",\"left\":\"706px\",\"top\":\"344px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"nodeStart\",\"to\":\"hsh5hukxxm\"},{\"from\":\"hsh5hukxxm\",\"to\":\"z5mc3ikea\"},{\"from\":\"hsh5hukxxm\",\"to\":\"pme8oslt4u\"},{\"from\":\"z5mc3ikea\",\"to\":\"nodeEnd\"},{\"from\":\"pme8oslt4u\",\"to\":\"nodeEnd\"}]}";
+    private final String flow = "{\"name\":\"流程\",\"nodeList\":[{\"id\":\"nodeStart\",\"name\":\"流程发起节点\",\"type\":\"start\",\"left\":\"84px\",\"top\":\"248px\",\"ico\":\"icon-flow-start green\"},{\"id\":\"nodeEnd\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"1139px\",\"top\":\"258px\",\"ico\":\"icon-flow-end red\"},{\"id\":\"hsh5hukxxm\",\"name\":\"流程节点2\",\"type\":\"task\",\"left\":\"492px\",\"top\":\"249px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"z5mc3ikea\",\"name\":\"流程节点\",\"type\":\"task\",\"left\":\"684px\",\"top\":\"157px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"pme8oslt4u\",\"name\":\"流程节点1\",\"type\":\"task\",\"left\":\"706px\",\"top\":\"344px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"nodeStart\",\"to\":\"hsh5hukxxm\"},{\"from\":\"hsh5hukxxm\",\"to\":\"z5mc3ikea\"},{\"from\":\"hsh5hukxxm\",\"to\":\"pme8oslt4u\"},{\"from\":\"z5mc3ikea\",\"to\":\"nodeEnd\"},{\"from\":\"pme8oslt4u\",\"to\":\"nodeEnd\"}]}";
 
 
     //流程存储组件
@@ -122,7 +125,6 @@ public class AddFlow {
                 endEvent=new EndEvent();
                 endEvent.setId(node.getStr("id"));
                 endEvent.setName(node.getStr("name"));
-
             }
 
             if("timer".equals(node.getStr("type"))) {
@@ -130,12 +132,21 @@ public class AddFlow {
                 userTask.setCandidateUsers(CollUtil.toList("1", "2", "3"));
                 userTask.setId(node.getStr("id"));
                 userTask.setName(node.getStr("name"));
-                FlowableListener flowableListener = new FlowableListener();
-                flowableListener.setEvent(CommonTaskListener.EVENTNAME_COMPLETE);
-                //设置监听
-                flowableListener.setImplementation("${commonTaskListener}");
-                flowableListener.setImplementationType("delegateExpression");
-                userTask.setTaskListeners(CollUtil.toList(flowableListener));
+                FlowableListener completeTaskListener = new FlowableListener();
+                completeTaskListener.setEvent(CommonTaskListener.EVENTNAME_COMPLETE);
+                //设置完成监听
+                completeTaskListener.setImplementation("${completeTaskListener}");
+                completeTaskListener.setImplementationType("delegateExpression");
+
+
+                FlowableListener createListener = new FlowableListener();
+                createListener.setEvent(CommonTaskListener.EVENTNAME_CREATE);
+                //设置创建监听
+                createListener.setImplementation("${createTaskListener}");
+                createListener.setImplementationType("delegateExpression");
+
+
+                userTask.setTaskListeners(CollUtil.toList(completeTaskListener, createListener));
                 userTasks.add(userTask);
             }
         }
@@ -237,46 +248,122 @@ public class AddFlow {
 
         System.out.println(deploy.toString());
 
-
         Deployment deployment = repositoryService.createDeploymentQuery().processDefinitionKey(processId).singleResult();
         if (deployment == null){
             System.out.println("没有该流程");
         }
         //流程部署id
-        String parentDeploymentId = deployment.getParentDeploymentId();
+        String deploymentId = deployment.getId();
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processId);
         //获取流程定义id
         String definitionId = processInstance.getProcessDefinitionId();
         //流程实例id
         String processInstanceId = processInstance.getProcessInstanceId();
 
-        Task task = taskService.createTaskQuery().singleResult();
-        task.setAssignee("1");
-        System.out.println("当前任务：" + task.toString());
+        log.debug("============>开始流转第一个节点");
         this.getTaskHistory(processInstanceId);
-        Map vars = new HashMap<>();
-        vars.put("days", 7);
-        taskService.complete(task.getId(), vars);
-        Task task2 = taskService.createTaskQuery().singleResult();
-        System.out.println("当前任务：" + task2.toString());
         this.getAssignee(processInstanceId);
+        Task task = this.getTask(processInstanceId);
+        this.completeTask(task);
+        log.debug("<============结束流转第一个节点");
+        log.debug("============>开始流转第二个节点");
+        this.getOwnerTask("2");
         this.getTaskHistory(processInstanceId);
-        //taskService.complete(task2.getId());
-        List<Task> tasks = taskService.createTaskQuery().taskCandidateUser("1").list();
-        System.out.println("当前用户的任务列表："+ ArrayUtil.toString(tasks));
+        this.getAssignee(processInstanceId);
+        Task task2 = this.getTask(processInstanceId);
+        this.completeTask(task2);
+        log.debug("<============结束流转第二个节点");
+//        Task task = taskService.createTaskQuery().singleResult();
+//        task.setAssignee("1");
+//        System.out.println("当前任务：" + task.toString());
+//        this.getTaskHistory(processInstanceId);
+//        Map vars = new HashMap<>();
+//        vars.put("days", 7);
+//        taskService.complete(task.getId(), vars);
+//        Task task2 = taskService.createTaskQuery().singleResult();
+//        System.out.println("当前任务：" + task2.toString());
+//        this.getAssignee(processInstanceId);
+//        this.getTaskHistory(processInstanceId);
+//        //taskService.complete(task2.getId());
+//        List<Task> tasks = taskService.createTaskQuery().taskCandidateUser("1").list();
+//        System.out.println("当前用户的任务列表："+ ArrayUtil.toString(tasks));
     }
 
 
+    @Test
+    public void testBuilder() {
+        BpmnModel bpmnModel = new BpmnModelBuilder(flow).builderNode().builderLine().builderRelation().builder(processId).checkModel();
+        //查看流程绘制情况
+        BpmnXMLConverter bpmnXMLConverter=new BpmnXMLConverter();
+        byte[] convertToXML = bpmnXMLConverter.convertToXML(bpmnModel);
+        String bytes=new String(convertToXML);
+
+        System.out.println(bytes);
+    }
+
+
+
+    /**
+     * 获取当前流程的流程历史
+     * @param processInstanceId
+     */
     public void getTaskHistory(String processInstanceId) {
         List<HistoricTaskInstance> list = historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstanceId).list();
         list.stream().forEach(historicTaskInstance -> {
-            System.out.println("历史流程："+historicTaskInstance.getName()+" "+ historicTaskInstance.getAssignee());
+            System.out.println("历史流程："+historicTaskInstance.getName()+" 处理人："+ historicTaskInstance.getAssignee()+" 任务所属人："+historicTaskInstance.getOwner());
         });
     }
 
+    /**
+     * 获取当前处理人的任务
+     * @param userId
+     */
+    public void getOwnerTask (String userId) {
+        List<Task> tasks = taskService.createTaskQuery().taskOwner(userId).list();
+        log.debug("当前用户[{}]的任务集合{}", userId, ArrayUtil.toString(tasks));
+    }
+
+    /**
+     * 获取当前人的代理人
+     * @param processInstanceId
+     */
     public void getAssignee(String processInstanceId) {
         Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
         System.out.println("当前实例任务:"+task.toString());
+    }
+
+
+    /**
+     * 获取当前流程任务
+     * @param processInstanceId
+     * @return
+     */
+    public Task getTask(String processInstanceId) {
+        Task task = taskService.createTaskQuery().taskCandidateUser("2").singleResult();
+        log.debug("当前user[2]任务:", task.toString());
+        return task;
+    }
+
+    /**
+     * 流转流程
+     * @param task
+     */
+    public void completeTask(Task task) {
+        Map vars = new HashMap<>();
+        vars.put("days", 7);
+        taskService.complete(task.getId(), vars);
+        log.debug("完成流程：", task.toString());
+    }
+
+    /**
+     * 获取下一步的候选人
+     * @param userId
+     * @param processInstanceId
+     */
+    public void getConditionUserId(String userId, String processInstanceId) {
+        //taskService.createTaskQuery().
+
+        List<Task> list = taskService.createTaskQuery().processInstanceId(processInstanceId).list();
     }
 
 }
