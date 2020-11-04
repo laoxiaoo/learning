@@ -1,13 +1,12 @@
 package com.xiao;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.jdbc.ScriptRunner;
 import org.apache.ibatis.reflection.ArrayUtil;
 
 import java.lang.reflect.Proxy;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * @program: learning
@@ -26,14 +25,19 @@ public class Test {
         Statement statement = null;
         ResultSet resultSet = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Class.forName("org.h2.Driver");
             connection = DriverManager.getConnection(url, username, password);
+            DatabaseMetaData metaData = connection.getMetaData();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 System.out.println(resultSet.getString(1)+" "
                         +resultSet.getString(2));
             }
+
+            ScriptRunner scriptRunner = new ScriptRunner(connection);
+            scriptRunner.runScript(Resources.getResourceAsReader("create-table.sql"));
         } finally {
             resultSet.close();
             statement.close();
@@ -65,4 +69,6 @@ public class Test {
     public void testConnect() {
 
     }
+
+
 }

@@ -5,9 +5,9 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.xiao.listener.CommonTaskListener;
 import org.flowable.bpmn.model.*;
 import org.flowable.bpmn.model.Process;
+import org.flowable.task.service.delegate.TaskListener;
 import org.flowable.validation.ProcessValidator;
 import org.flowable.validation.ProcessValidatorFactory;
 import org.flowable.validation.ValidationError;
@@ -50,12 +50,12 @@ public class BpmnModelBuilder {
     /**
      * 处理人 用户前缀
      */
-    public final static String CANDIDATE_USER_PREFIX = "user";
+    public final static String CANDIDATE_USER_PREFIX = "user::";
 
     /**
      * 处理人 部门前缀
      */
-    public final static String CANDIDATE_DEPART_PREFIX = "depart";
+    public final static String CANDIDATE_DEPART_PREFIX = "depart::";
 
     /**
      * 当前节点处理人：角色集合
@@ -127,17 +127,19 @@ public class BpmnModelBuilder {
             if(taskNodeType.equals(node.getStr("type"))) {
                 UserTask userTask=new UserTask();
                 JSONObject candidates = node.getJSONObject(this.candidateNodeName);
+
                 //设置候选人集合
                 Optional.ofNullable(candidates).map(this::transformCandidate).ifPresent(userTask::setCandidateUsers);
                 userTask.setId(node.getStr("id"));
                 userTask.setName(node.getStr("name"));
                 FlowableListener completeTaskListener = new FlowableListener();
-                completeTaskListener.setEvent(CommonTaskListener.EVENTNAME_COMPLETE);
+
+                completeTaskListener.setEvent(TaskListener.EVENTNAME_COMPLETE);
                 //设置完成监听
                 completeTaskListener.setImplementation(this.completeTaskListenerBeanName);
                 completeTaskListener.setImplementationType("delegateExpression");
                 FlowableListener createListener = new FlowableListener();
-                createListener.setEvent(CommonTaskListener.EVENTNAME_CREATE);
+                createListener.setEvent(TaskListener.EVENTNAME_CREATE);
                 //设置创建监听
                 createListener.setImplementation(this.createTaskListenerBeanName);
                 createListener.setImplementationType("delegateExpression");

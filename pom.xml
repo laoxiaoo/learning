@@ -42,6 +42,7 @@
         <module>esearch</module>
         <module>flowable</module>
         <module>mybatis</module>
+        <module>callback</module>
     </modules>
 
     <properties>

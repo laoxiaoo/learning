@@ -7,7 +7,6 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.xiao.flow.BpmnModelBuilder;
-import com.xiao.listener.CommonTaskListener;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
 import org.flowable.bpmn.model.*;
@@ -16,12 +15,12 @@ import org.flowable.engine.HistoryService;
 import org.flowable.engine.RepositoryService;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
-import org.flowable.engine.delegate.TaskListener;
 import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.flowable.task.api.history.HistoricTaskInstance;
+import org.flowable.task.service.delegate.TaskListener;
 import org.flowable.validation.ProcessValidator;
 import org.flowable.validation.ProcessValidatorFactory;
 import org.flowable.validation.ValidationError;
@@ -74,8 +73,8 @@ public class AddFlow {
 
     //private final String flow = "{\"name\":\"流程B\",\"nodeList\":[{\"id\":\"j64q7773on\",\"name\":\"数据接入\",\"type\":\"timer\",\"left\":\"242px\",\"top\":\"201px\",\"ico\":\"el-icon-time\",\"state\":\"success\"},{\"id\":\"om6o6k1sci\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"835px\",\"top\":\"244px\",\"ico\":\"el-icon-caret-right\",\"state\":\"success\"},{\"id\":\"fzdij1skj\",\"name\":\"数据接入1\",\"type\":\"timer\",\"left\":\"457px\",\"top\":\"173px\",\"ico\":\"el-icon-time\",\"state\":\"success\"},{\"id\":\"iq2vj993k\",\"name\":\"数据接入2\",\"type\":\"timer\",\"left\":\"493px\",\"top\":\"308px\",\"ico\":\"el-icon-time\",\"state\":\"success\"},{\"id\":\"f5jbsmgks\",\"name\":\"接口调用\",\"type\":\"task\",\"left\":\"40px\",\"top\":\"203px\",\"ico\":\"el-icon-odometer\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"f5jbsmgks\",\"to\":\"j64q7773on\"},{\"from\":\"j64q7773on\",\"to\":\"fzdij1skj\"},{\"from\":\"fzdij1skj\",\"to\":\"iq2vj993k\"},{\"from\":\"iq2vj993k\",\"to\":\"om6o6k1sci\"}]}";
 
-    private final String flow = "{\"name\":\"流程\",\"nodeList\":[{\"id\":\"nodeStart\",\"name\":\"流程发起节点\",\"type\":\"start\",\"left\":\"84px\",\"top\":\"248px\",\"ico\":\"icon-flow-start green\"},{\"id\":\"nodeEnd\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"1139px\",\"top\":\"258px\",\"ico\":\"icon-flow-end red\"},{\"id\":\"hsh5hukxxm\",\"name\":\"流程节点2\",\"type\":\"task\",\"left\":\"492px\",\"top\":\"249px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"z5mc3ikea\",\"name\":\"流程节点\",\"type\":\"task\",\"left\":\"684px\",\"top\":\"157px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"pme8oslt4u\",\"name\":\"流程节点1\",\"type\":\"task\",\"left\":\"706px\",\"top\":\"344px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"nodeStart\",\"to\":\"hsh5hukxxm\"},{\"from\":\"hsh5hukxxm\",\"to\":\"z5mc3ikea\"},{\"from\":\"hsh5hukxxm\",\"to\":\"pme8oslt4u\"},{\"from\":\"z5mc3ikea\",\"to\":\"nodeEnd\"},{\"from\":\"pme8oslt4u\",\"to\":\"nodeEnd\"}]}";
-
+    //private final String flow = "{\"name\":\"流程\",\"nodeList\":[{\"id\":\"nodeStart\",\"name\":\"流程发起节点\",\"type\":\"start\",\"left\":\"84px\",\"top\":\"248px\",\"ico\":\"icon-flow-start green\"},{\"id\":\"nodeEnd\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"1139px\",\"top\":\"258px\",\"ico\":\"icon-flow-end red\"},{\"id\":\"hsh5hukxxm\",\"name\":\"流程节点2\",\"type\":\"task\",\"left\":\"492px\",\"top\":\"249px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"z5mc3ikea\",\"name\":\"流程节点\",\"type\":\"task\",\"left\":\"684px\",\"top\":\"157px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"pme8oslt4u\",\"name\":\"流程节点1\",\"type\":\"task\",\"left\":\"706px\",\"top\":\"344px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"nodeStart\",\"to\":\"hsh5hukxxm\"},{\"from\":\"hsh5hukxxm\",\"to\":\"z5mc3ikea\"},{\"from\":\"hsh5hukxxm\",\"to\":\"pme8oslt4u\"},{\"from\":\"z5mc3ikea\",\"to\":\"nodeEnd\"},{\"from\":\"pme8oslt4u\",\"to\":\"nodeEnd\"}]}";
+    private final String flow = "{\"name\":\"流程\",\"nodeList\":[{\"id\":\"nodeStart\",\"name\":\"流程发起节点\",\"type\":\"start\",\"left\":\"84px\",\"top\":\"248px\",\"ico\":\"icon-flow-start green\"},{\"id\":\"nodeEnd\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"1139px\",\"top\":\"258px\",\"ico\":\"icon-flow-end red\"},{\"id\":\"hsh5hukxxm\",\"name\":\"流程节点2\",\"type\":\"task\",\"left\":\"492px\",\"top\":\"249px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\",\"candidates\":{\"users\":[1,2,3],\"departs\":[1,2],\"roles\":[]}},{\"id\":\"z5mc3ikea\",\"name\":\"流程节点\",\"type\":\"task\",\"left\":\"684px\",\"top\":\"157px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"pme8oslt4u\",\"name\":\"流程节点1\",\"type\":\"task\",\"left\":\"706px\",\"top\":\"344px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"nodeStart\",\"to\":\"hsh5hukxxm\"},{\"from\":\"hsh5hukxxm\",\"to\":\"z5mc3ikea\"},{\"from\":\"hsh5hukxxm\",\"to\":\"pme8oslt4u\"},{\"from\":\"z5mc3ikea\",\"to\":\"nodeEnd\"},{\"from\":\"pme8oslt4u\",\"to\":\"nodeEnd\"}]}";
 
     //流程存储组件
     @Autowired
@@ -90,8 +89,6 @@ public class AddFlow {
     @Autowired
     private HistoryService historyService;
 
-    @Autowired
-    private CommonTaskListener commonTaskListener;
 
 
     String processId= "process3";
@@ -133,14 +130,14 @@ public class AddFlow {
                 userTask.setId(node.getStr("id"));
                 userTask.setName(node.getStr("name"));
                 FlowableListener completeTaskListener = new FlowableListener();
-                completeTaskListener.setEvent(CommonTaskListener.EVENTNAME_COMPLETE);
+                completeTaskListener.setEvent(TaskListener.EVENTNAME_COMPLETE);
                 //设置完成监听
                 completeTaskListener.setImplementation("${completeTaskListener}");
                 completeTaskListener.setImplementationType("delegateExpression");
 
 
                 FlowableListener createListener = new FlowableListener();
-                createListener.setEvent(CommonTaskListener.EVENTNAME_CREATE);
+                createListener.setEvent(TaskListener.EVENTNAME_CREATE);
                 //设置创建监听
                 createListener.setImplementation("${createTaskListener}");
                 createListener.setImplementationType("delegateExpression");
@@ -340,6 +337,7 @@ public class AddFlow {
      */
     public Task getTask(String processInstanceId) {
         Task task = taskService.createTaskQuery().taskCandidateUser("2").singleResult();
+
         log.debug("当前user[2]任务:", task.toString());
         return task;
     }
