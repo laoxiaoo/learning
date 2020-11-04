@@ -17,6 +17,7 @@ import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.engine.repository.Deployment;
+import org.flowable.engine.runtime.Execution;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.flowable.task.api.history.HistoricTaskInstance;
@@ -296,6 +297,41 @@ public class AddFlow {
         String bytes=new String(convertToXML);
 
         System.out.println(bytes);
+
+        //部署流程
+        Deployment deploy = repositoryService.createDeployment()
+                .name("测试流程")
+                .key(processId)
+                .addBpmnModel("bpmnModel.bpmn", bpmnModel).deploy();
+
+        System.out.println(deploy.toString());
+
+        Deployment deployment = repositoryService.createDeploymentQuery().processDefinitionKey(processId).singleResult();
+        if (deployment == null){
+            System.out.println("没有该流程");
+        }
+        //流程部署id
+        String deploymentId = deployment.getId();
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processId);
+        //获取流程定义id
+        String definitionId = processInstance.getProcessDefinitionId();
+        //流程实例id
+        String processInstanceId = processInstance.getProcessInstanceId();
+
+        log.debug("============>开始流转第一个节点");
+        this.getTaskHistory(processInstanceId);
+        this.getAssignee(processInstanceId);
+        Task task = this.getTask(processInstanceId);
+        this.getNowNode(task);
+        this.completeTask(task);
+        log.debug("<============结束流转第一个节点");
+        log.debug("============>开始流转第二个节点");
+        this.getOwnerTask("2");
+        this.getTaskHistory(processInstanceId);
+        this.getAssignee(processInstanceId);
+        Task task2 = this.getTask(processInstanceId);
+        this.completeTask(task2);
+        log.debug("<============结束流转第二个节点");
     }
 
 
@@ -336,7 +372,7 @@ public class AddFlow {
      * @return
      */
     public Task getTask(String processInstanceId) {
-        Task task = taskService.createTaskQuery().taskCandidateUser("2").singleResult();
+        Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
 
         log.debug("当前user[2]任务:", task.toString());
         return task;
@@ -362,6 +398,40 @@ public class AddFlow {
         //taskService.createTaskQuery().
 
         List<Task> list = taskService.createTaskQuery().processInstanceId(processInstanceId).list();
+    }
+
+    /**
+     * 获取当前节点信息
+     * @param task
+     */
+    public void getNowNode(Task task) {
+        Execution execution = runtimeService.createExecutionQuery().executionId(task.getExecutionId()).singleResult();
+        //String activityId = execution.getActivityId();
+        log.debug("{} execution : {}", task.getName(), execution);
+        System.out.println(execution);
+        // 当前审批节点
+        String currentActivityId = execution.getActivityId();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(task.getProcessDefinitionId());
+        FlowNode flowNode = (FlowNode) bpmnModel.getFlowElement(currentActivityId);
+        // 输出连线
+        List<SequenceFlow> outFlows = flowNode.getOutgoingFlows();
+        /*for (SequenceFlow sequenceFlow : outFlows) {
+            //当前审批节点
+            if ("now".equals(node)) {
+                FlowElement sourceFlowElement = sequenceFlow.getSourceFlowElement();
+                System.out.println("当前节点: id=" + sourceFlowElement.getId() + ",name=" + sourceFlowElement.getName());
+            } else if ("next".equals(node)) {
+                // 下一个审批节点
+                FlowElement targetFlow = sequenceFlow.getTargetFlowElement();
+                if (targetFlow instanceof UserTask) {
+                    System.out.println("下一节点: id=" + targetFlow.getId() + ",name=" + targetFlow.getName());
+                }
+                // 如果下个审批节点为结束节点
+                if (targetFlow instanceof EndEvent) {
+                    System.out.println("下一节点为结束节点：id=" + targetFlow.getId() + ",name=" + targetFlow.getName());
+                }
+            }
+        }*/
     }
 
 }

@@ -147,6 +147,17 @@ public class BpmnModelBuilder {
                 userTasks.add(userTask);
             }
         }
+        ExtensionElement extensionElement = new ExtensionElement();
+        extensionElement.setName("flowable:myTable");
+        ExtensionAttribute extensionAttribute = new ExtensionAttribute();
+        extensionAttribute.setName("tableColumn1");
+        extensionAttribute.setValue("表单值2222");
+        ExtensionAttribute extensionAttribute2 = new ExtensionAttribute();
+        extensionAttribute.setName("tableColumn2");
+        extensionAttribute.setValue("表单值2222");
+        extensionElement.addAttribute(extensionAttribute);
+        extensionElement.addAttribute(extensionAttribute2);
+        userTasks.get(0).addExtensionElement(extensionElement);
         return this;
     }
 
