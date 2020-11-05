@@ -2,6 +2,7 @@ package com.xiao;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
@@ -29,6 +30,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.common.TemplateParserContext;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -323,6 +328,7 @@ public class AddFlow {
         this.getAssignee(processInstanceId);
         Task task = this.getTask(processInstanceId);
         this.getNowNode(task);
+        this.getNextNode(task);
         this.completeTask(task);
         log.debug("<============结束流转第一个节点");
         log.debug("============>开始流转第二个节点");
@@ -432,6 +438,61 @@ public class AddFlow {
                 }
             }
         }*/
+    }
+
+    public void getNextNode(Task task) {
+        Execution execution = runtimeService.createExecutionQuery().executionId(task.getExecutionId()).singleResult();
+
+        // 当前审批节点
+        String currentActivityId = execution.getActivityId();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(task.getProcessDefinitionId());
+        FlowNode flowNode = (FlowNode) bpmnModel.getFlowElement(currentActivityId);
+        // 输出连线
+        List<SequenceFlow> outFlows = flowNode.getOutgoingFlows();
+
+        getNext(outFlows);
+    }
+
+    public UserTask getNext(List<SequenceFlow> outFlows) {
+        for (SequenceFlow sequenceFlow : outFlows) {
+            FlowElement targetFlow = sequenceFlow.getTargetFlowElement();
+            if(ObjectUtil.isNull(sequenceFlow.getConditionExpression())
+                    || Boolean.valueOf(
+                    String.valueOf(
+                            result(sequenceFlow.getConditionExpression()
+                                    .substring(sequenceFlow.getConditionExpression().lastIndexOf("{") + 1,
+                                            sequenceFlow.getConditionExpression().lastIndexOf("}")))))) {
+                //用户任务
+                if(targetFlow instanceof ExclusiveGateway) {
+                    List<SequenceFlow> outgoingFlows = ((ExclusiveGateway) targetFlow).getOutgoingFlows();
+                    getNext(outgoingFlows);
+                }
+                if(targetFlow instanceof UserTask) {
+                    UserTask userTask = (UserTask) targetFlow;
+                    if(ObjectUtil.isNotEmpty(userTask)) {
+
+                    }
+                    return (UserTask)targetFlow;
+                }
+            }
+
+        }
+        return null;
+    }
+
+    /**
+     * 校验el表达示例
+     *
+     * @param
+     * @param exp
+     * @return
+     */
+    public static Object result(String exp) {
+
+        ExpressionParser parser = new SpelExpressionParser();
+        Expression expression = parser.parseExpression(exp, new TemplateParserContext());
+        String value = expression.getValue("4", String.class);
+        return value;
     }
 
 }
