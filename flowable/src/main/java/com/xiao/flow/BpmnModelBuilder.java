@@ -58,6 +58,14 @@ public class BpmnModelBuilder {
     public final static String CANDIDATE_DEPART_PREFIX = "depart::";
 
     /**
+     * 表单字段节点名称
+     */
+    public final static String COLUMN_NAME = "tableColumn";
+
+    public final static String COLUMN_ATTR_NAME = "columnId";
+
+
+    /**
      * 当前节点处理人：角色集合
      */
     private final String candidateRoles = "roles";
@@ -70,6 +78,8 @@ public class BpmnModelBuilder {
      * 当前节点处理人：部门集合集合
      */
     private final String candidateDeparts = "departs";
+
+    private final String columnIds = "columnIds";
 
 
 
@@ -127,9 +137,16 @@ public class BpmnModelBuilder {
             if(taskNodeType.equals(node.getStr("type"))) {
                 UserTask userTask=new UserTask();
                 JSONObject candidates = node.getJSONObject(this.candidateNodeName);
-
+                JSONArray columnIds = node.getJSONArray(this.columnIds);
                 //设置候选人集合
                 Optional.ofNullable(candidates).map(this::transformCandidate).ifPresent(userTask::setCandidateUsers);
+
+                //设置表单集合
+                Optional.ofNullable(columnIds).map(this::transformColumns).ifPresent(columnId->{
+                    columnId.stream().forEach(userTask::addExtensionElement);
+                });
+
+
                 userTask.setId(node.getStr("id"));
                 userTask.setName(node.getStr("name"));
                 FlowableListener completeTaskListener = new FlowableListener();
@@ -147,17 +164,6 @@ public class BpmnModelBuilder {
                 userTasks.add(userTask);
             }
         }
-        ExtensionElement extensionElement = new ExtensionElement();
-        extensionElement.setName("flowable:myTable");
-        ExtensionAttribute extensionAttribute = new ExtensionAttribute();
-        extensionAttribute.setName("tableColumn1");
-        extensionAttribute.setValue("表单值2222");
-        ExtensionAttribute extensionAttribute2 = new ExtensionAttribute();
-        extensionAttribute.setName("tableColumn2");
-        extensionAttribute.setValue("表单值2222");
-        extensionElement.addAttribute(extensionAttribute);
-        extensionElement.addAttribute(extensionAttribute2);
-        userTasks.get(0).addExtensionElement(extensionElement);
         return this;
     }
 
@@ -271,6 +277,21 @@ public class BpmnModelBuilder {
         Optional.ofNullable(roles).ifPresent(rets::addAll);
         Optional.ofNullable(departs).ifPresent(rets::addAll);
         return rets;
+    }
+
+    private List<ExtensionElement> transformColumns(JSONArray columns) {
+        List<ExtensionElement> extensionElements = columns
+                .stream()
+                .map(String::valueOf).map(column -> {
+                    ExtensionAttribute extensionAttribute = new ExtensionAttribute();
+                    extensionAttribute.setName(COLUMN_ATTR_NAME);
+                    extensionAttribute.setValue(column);
+                    ExtensionElement extensionElement = new ExtensionElement();
+                    extensionElement.setName("flowable:"+COLUMN_NAME);
+                    extensionElement.addAttribute(extensionAttribute);
+                    return extensionElement;
+                }).collect(Collectors.toList());
+        return extensionElements;
     }
 
 }

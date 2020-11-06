@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.apache.ibatis.reflection.ArrayUtil;
+import org.apache.ibatis.reflection.MetaObject;
 
 import java.lang.reflect.Proxy;
 import java.sql.*;
@@ -70,5 +71,7 @@ public class Test {
 
     }
 
+    public void testMateObj() {
+    }
 
 }
