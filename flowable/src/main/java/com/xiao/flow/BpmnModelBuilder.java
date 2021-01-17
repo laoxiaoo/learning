@@ -87,6 +87,8 @@ public class BpmnModelBuilder {
 
     public BpmnModelBuilder(String flowJson) {
         this.flowJson = JSONUtil.parseObj(flowJson);
+
+
         this.userTasks = new ArrayList<>();
         this.startEvent = new StartEvent();
         this.endEvent = new EndEvent();
@@ -110,6 +112,7 @@ public class BpmnModelBuilder {
      * @return
      */
     public BpmnModelBuilder builderNode() {
+
         nodeList = flowJson.getJSONArray("nodeList");
         for(int i=0; i<nodeList.size(); i++) {
             JSONObject node = nodeList.getJSONObject(i);

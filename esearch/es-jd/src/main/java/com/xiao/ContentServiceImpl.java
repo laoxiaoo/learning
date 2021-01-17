@@ -19,6 +19,7 @@ import javax.naming.directory.SearchResult;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ContentServiceImpl {
+    
 
     @Autowired
     private RestHighLevelClient restHighLevelClient;
@@ -45,6 +47,7 @@ public class ContentServiceImpl {
         searchRequest.source(sourceBuilder);
 
         SearchResponse search = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+
 
         List<Map<String, Object>> list = Arrays.stream(search.getHits().getHits()).map(SearchHit::getSourceAsMap).collect(Collectors.toList());
         return list;

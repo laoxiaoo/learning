@@ -43,6 +43,9 @@
         <module>flowable</module>
         <module>mybatis</module>
         <module>callback</module>
+        <module>log</module>
+        <module>demo-security</module>
+        <module>demo-shiro</module>
     </modules>
 
     <properties>
