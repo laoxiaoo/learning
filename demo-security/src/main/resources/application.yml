@@ -6,3 +6,5 @@ server:
 #    user:
 #      name: test
 #      password: test
+logging:
+  level: debug
