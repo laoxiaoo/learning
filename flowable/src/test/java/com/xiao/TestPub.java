@@ -46,12 +46,13 @@ public class TestPub {
 
     @Before
     public void test1() {
-
         BpmnModel bpmnModel=new BpmnModel();
         //开始节点的属性
         StartEvent startEvent=new StartEvent();
         startEvent.setId("start-test");
         startEvent.setName("start-test-name");
+
+
 
         //普通的UserTask节点
         UserTask userTask=new UserTask();
@@ -63,6 +64,14 @@ public class TestPub {
         EndEvent endEvent=new EndEvent();
         endEvent.setId("endEvent-test");
         endEvent.setName("endEvent-test-name");
+
+
+
+
+
+
+
+
 
         //连线信息
         List<SequenceFlow> sequenceFlows=new ArrayList<SequenceFlow>();

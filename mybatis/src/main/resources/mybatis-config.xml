@@ -12,6 +12,8 @@
                 <property name="username" value="sa"/>
                 <property name="password" value="123456"/>
             </dataSource>
+
+
         </environment>
     </environments>
     <mappers>
