@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/test">
-  <process id="process3" name="process3" isExecutable="true">
-    <sequenceFlow id="line_qmpvb2" name="line_qmpvb2" sourceRef="nodeStart" targetRef="hsh5hukxxm"></sequenceFlow>
-    <sequenceFlow id="line_drs0lz" name="line_drs0lz" sourceRef="gateWaymr4tsm" targetRef="z5mc3ikea">
+  <process id="process5" name="process5" isExecutable="true">
+    <sequenceFlow id="line_e84aak" name="line_e84aak" sourceRef="nodeStart" targetRef="hsh5hukxxm"></sequenceFlow>
+    <sequenceFlow id="line_4sz35o" name="line_4sz35o" sourceRef="gateWayyo2qqs" targetRef="z5mc3ikea">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${days>5}]]></conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="line_9veal9" name="line_9veal9" sourceRef="gateWaymr4tsm" targetRef="pme8oslt4u">
+    <sequenceFlow id="line_0nwwma" name="line_0nwwma" sourceRef="gateWayyo2qqs" targetRef="pme8oslt4u">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${days<=5}]]></conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="line_u1ffjq" name="line_u1ffjq" sourceRef="z5mc3ikea" targetRef="nodeEnd"></sequenceFlow>
-    <sequenceFlow id="line_m3dhvb" name="line_m3dhvb" sourceRef="pme8oslt4u" targetRef="nodeEnd"></sequenceFlow>
-    <sequenceFlow id="line_edlo0h" name="line_edlo0h" sourceRef="hsh5hukxxm" targetRef="gateWaymr4tsm"></sequenceFlow>
-    <exclusiveGateway id="gateWaymr4tsm" name="gateWaymr4tsm"></exclusiveGateway>
-    <userTask id="hsh5hukxxm" name="流程节点2" flowable:candidateUsers="user::1,user::2,user::3,depart::1,depart::2">
+    <sequenceFlow id="line_8m6iwc" name="line_8m6iwc" sourceRef="z5mc3ikea" targetRef="nodeEnd"></sequenceFlow>
+    <sequenceFlow id="line_epxxob" name="line_epxxob" sourceRef="pme8oslt4u" targetRef="nodeEnd"></sequenceFlow>
+    <sequenceFlow id="line_gmz7ck" name="line_gmz7ck" sourceRef="hsh5hukxxm" targetRef="gateWayyo2qqs"></sequenceFlow>
+    <exclusiveGateway id="gateWayyo2qqs" name="gateWayyo2qqs"></exclusiveGateway>
+    <userTask id="hsh5hukxxm" name="流程节点2" flowable:candidateUsers="1,2,3">
       <extensionElements>
         <flowable:taskListener event="complete" delegateExpression="${completeTaskListener}"></flowable:taskListener>
         <flowable:taskListener event="create" delegateExpression="${createTaskListener}"></flowable:taskListener>
       </extensionElements>
     </userTask>
-    <userTask id="z5mc3ikea" name="流程节点">
+    <userTask id="z5mc3ikea" name="流程节点" flowable:candidateUsers="1,2,3">
       <extensionElements>
         <flowable:taskListener event="complete" delegateExpression="${completeTaskListener}"></flowable:taskListener>
         <flowable:taskListener event="create" delegateExpression="${createTaskListener}"></flowable:taskListener>
       </extensionElements>
     </userTask>
-    <userTask id="pme8oslt4u" name="流程节点1">
+    <userTask id="pme8oslt4u" name="流程节点1" flowable:candidateUsers="1,2,3">
       <extensionElements>
         <flowable:taskListener event="complete" delegateExpression="${completeTaskListener}"></flowable:taskListener>
         <flowable:taskListener event="create" delegateExpression="${createTaskListener}"></flowable:taskListener>
@@ -33,7 +33,7 @@
     <startEvent id="nodeStart" name="流程发起节点"></startEvent>
     <endEvent id="nodeEnd" name="流程结束"></endEvent>
   </process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_process3">
-    <bpmndi:BPMNPlane bpmnElement="process3" id="BPMNPlane_process3"></bpmndi:BPMNPlane>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_process5">
+    <bpmndi:BPMNPlane bpmnElement="process5" id="BPMNPlane_process5"></bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </definitions>

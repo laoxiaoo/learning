@@ -7,6 +7,9 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.greenpineyu.fel.FelEngine;
+import com.greenpineyu.fel.FelEngineImpl;
+import com.greenpineyu.fel.context.FelContext;
 import com.xiao.flow.BpmnModelBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
@@ -30,10 +33,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -79,8 +84,8 @@ public class AddFlow {
 
     //private final String flow = "{\"name\":\"流程B\",\"nodeList\":[{\"id\":\"j64q7773on\",\"name\":\"数据接入\",\"type\":\"timer\",\"left\":\"242px\",\"top\":\"201px\",\"ico\":\"el-icon-time\",\"state\":\"success\"},{\"id\":\"om6o6k1sci\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"835px\",\"top\":\"244px\",\"ico\":\"el-icon-caret-right\",\"state\":\"success\"},{\"id\":\"fzdij1skj\",\"name\":\"数据接入1\",\"type\":\"timer\",\"left\":\"457px\",\"top\":\"173px\",\"ico\":\"el-icon-time\",\"state\":\"success\"},{\"id\":\"iq2vj993k\",\"name\":\"数据接入2\",\"type\":\"timer\",\"left\":\"493px\",\"top\":\"308px\",\"ico\":\"el-icon-time\",\"state\":\"success\"},{\"id\":\"f5jbsmgks\",\"name\":\"接口调用\",\"type\":\"task\",\"left\":\"40px\",\"top\":\"203px\",\"ico\":\"el-icon-odometer\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"f5jbsmgks\",\"to\":\"j64q7773on\"},{\"from\":\"j64q7773on\",\"to\":\"fzdij1skj\"},{\"from\":\"fzdij1skj\",\"to\":\"iq2vj993k\"},{\"from\":\"iq2vj993k\",\"to\":\"om6o6k1sci\"}]}";
 
-    //private final String flow = "{\"name\":\"流程\",\"nodeList\":[{\"id\":\"nodeStart\",\"name\":\"流程发起节点\",\"type\":\"start\",\"left\":\"84px\",\"top\":\"248px\",\"ico\":\"icon-flow-start green\"},{\"id\":\"nodeEnd\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"1139px\",\"top\":\"258px\",\"ico\":\"icon-flow-end red\"},{\"id\":\"hsh5hukxxm\",\"name\":\"流程节点2\",\"type\":\"task\",\"left\":\"492px\",\"top\":\"249px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"z5mc3ikea\",\"name\":\"流程节点\",\"type\":\"task\",\"left\":\"684px\",\"top\":\"157px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"pme8oslt4u\",\"name\":\"流程节点1\",\"type\":\"task\",\"left\":\"706px\",\"top\":\"344px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"nodeStart\",\"to\":\"hsh5hukxxm\"},{\"from\":\"hsh5hukxxm\",\"to\":\"z5mc3ikea\"},{\"from\":\"hsh5hukxxm\",\"to\":\"pme8oslt4u\"},{\"from\":\"z5mc3ikea\",\"to\":\"nodeEnd\"},{\"from\":\"pme8oslt4u\",\"to\":\"nodeEnd\"}]}";
-    private final String flow = "{\"name\":\"流程\",\"nodeList\":[{\"id\":\"nodeStart\",\"name\":\"流程发起节点\",\"type\":\"start\",\"left\":\"84px\",\"top\":\"248px\",\"ico\":\"icon-flow-start green\"},{\"id\":\"nodeEnd\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"1139px\",\"top\":\"258px\",\"ico\":\"icon-flow-end red\"},{\"id\":\"hsh5hukxxm\",\"name\":\"流程节点2\",\"type\":\"task\",\"left\":\"492px\",\"top\":\"249px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\",\"candidates\":{\"users\":[1,2,3],\"departs\":[1,2],\"roles\":[]},\"columnIds\":[1,2,3]},{\"id\":\"z5mc3ikea\",\"name\":\"流程节点\",\"type\":\"task\",\"left\":\"684px\",\"top\":\"157px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"pme8oslt4u\",\"name\":\"流程节点1\",\"type\":\"task\",\"left\":\"706px\",\"top\":\"344px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"nodeStart\",\"to\":\"hsh5hukxxm\"},{\"from\":\"hsh5hukxxm\",\"to\":\"z5mc3ikea\"},{\"from\":\"hsh5hukxxm\",\"to\":\"pme8oslt4u\"},{\"from\":\"z5mc3ikea\",\"to\":\"nodeEnd\"},{\"from\":\"pme8oslt4u\",\"to\":\"nodeEnd\"}]}";
+    private final String flow = "{\"name\":\"流程\",\"nodeList\":[{\"id\":\"nodeStart\",\"name\":\"流程发起节点\",\"type\":\"start\",\"left\":\"84px\",\"top\":\"248px\",\"ico\":\"icon-flow-start green\"},{\"id\":\"nodeEnd\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"1139px\",\"top\":\"258px\",\"ico\":\"icon-flow-end red\"},{\"id\":\"hsh5hukxxm\",\"name\":\"流程节点2\",\"type\":\"task\",\"left\":\"492px\",\"top\":\"249px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"z5mc3ikea\",\"name\":\"流程节点\",\"type\":\"task\",\"left\":\"684px\",\"top\":\"157px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"pme8oslt4u\",\"name\":\"流程节点1\",\"type\":\"task\",\"left\":\"706px\",\"top\":\"344px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"nodeStart\",\"to\":\"hsh5hukxxm\"},{\"from\":\"hsh5hukxxm\",\"to\":\"z5mc3ikea\"},{\"from\":\"hsh5hukxxm\",\"to\":\"pme8oslt4u\"},{\"from\":\"z5mc3ikea\",\"to\":\"nodeEnd\"},{\"from\":\"pme8oslt4u\",\"to\":\"nodeEnd\"}]}";
+    //private final String flow = "{\"name\":\"流程\",\"nodeList\":[{\"id\":\"nodeStart\",\"name\":\"流程发起节点\",\"type\":\"start\",\"left\":\"84px\",\"top\":\"248px\",\"ico\":\"icon-flow-start green\"},{\"id\":\"nodeEnd\",\"name\":\"流程结束\",\"type\":\"end\",\"left\":\"1139px\",\"top\":\"258px\",\"ico\":\"icon-flow-end red\"},{\"id\":\"hsh5hukxxm\",\"name\":\"流程节点2\",\"type\":\"task\",\"left\":\"492px\",\"top\":\"249px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\",\"candidates\":{\"users\":[1,2,3],\"departs\":[1,2],\"roles\":[]},\"columnIds\":[1,2,3]},{\"id\":\"z5mc3ikea\",\"name\":\"流程节点\",\"type\":\"task\",\"left\":\"684px\",\"top\":\"157px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"},{\"id\":\"pme8oslt4u\",\"name\":\"流程节点1\",\"type\":\"task\",\"left\":\"706px\",\"top\":\"344px\",\"ico\":\"icon-flow-node green\",\"state\":\"success\"}],\"lineList\":[{\"from\":\"nodeStart\",\"to\":\"hsh5hukxxm\"},{\"from\":\"hsh5hukxxm\",\"to\":\"z5mc3ikea\"},{\"from\":\"hsh5hukxxm\",\"to\":\"pme8oslt4u\"},{\"from\":\"z5mc3ikea\",\"to\":\"nodeEnd\"},{\"from\":\"pme8oslt4u\",\"to\":\"nodeEnd\"}]}";
 
     //流程存储组件
     @Autowired
@@ -97,10 +102,14 @@ public class AddFlow {
 
 
 
-    String processId= "process3";
+    String processId= "process5";
 
     @Test
     public void test() {
+
+        if(true) {
+            return;
+        }
         JSONObject flowJson = JSONUtil.parseObj(flow);
         BpmnModel bpmnModel=new BpmnModel();
 
@@ -118,7 +127,7 @@ public class AddFlow {
         List<UserTask> userTasks = new ArrayList<>();
         for(int i=0; i<nodeList.size(); i++) {
             JSONObject node = nodeList.getJSONObject(i);
-            if("task".equals(node.getStr("type"))) {
+            if("start".equals(node.getStr("type"))) {
                 startEvent=new StartEvent();
                 startEvent.setId(node.getStr("id"));
                 startEvent.setName(node.getStr("name"));
@@ -128,9 +137,14 @@ public class AddFlow {
                 endEvent=new EndEvent();
                 endEvent.setId(node.getStr("id"));
                 endEvent.setName(node.getStr("name"));
+//                FlowableListener completeTaskListener = new FlowableListener();
+//                completeTaskListener.setEvent(TaskListener.EVENTNAME_COMPLETE);
+//                completeTaskListener.setImplementation("${endTaskListener}");
+//                completeTaskListener.setImplementationType("delegateExpression");
+//                endEvent.setExecutionListeners(CollUtil.toList(completeTaskListener));
             }
 
-            if("timer".equals(node.getStr("type"))) {
+            if("task".equals(node.getStr("type"))) {
                 UserTask userTask=new UserTask();
                 userTask.setCandidateUsers(CollUtil.toList("1", "2", "3"));
                 userTask.setId(node.getStr("id"));
@@ -268,14 +282,23 @@ public class AddFlow {
         this.getAssignee(processInstanceId);
         Task task = this.getTask(processInstanceId);
         this.completeTask(task);
+
         log.debug("<============结束流转第一个节点");
         log.debug("============>开始流转第二个节点");
         this.getOwnerTask("2");
         this.getTaskHistory(processInstanceId);
         this.getAssignee(processInstanceId);
         Task task2 = this.getTask(processInstanceId);
+        Map vars = new HashMap<>();
+        vars.put("days", 7);
+        taskService.setVariablesLocal(task2.getId(), vars);
         this.completeTask(task2);
         log.debug("<============结束流转第二个节点");
+        Task task3 = this.getTask(processInstanceId);
+        this.completeTask(task3);
+        Task task4 = this.getTask(processInstanceId);
+        this.completeTask(task4);
+        System.out.println(task4);
 //        Task task = taskService.createTaskQuery().singleResult();
 //        task.setAssignee("1");
 //        System.out.println("当前任务：" + task.toString());
@@ -329,6 +352,15 @@ public class AddFlow {
         Task task = this.getTask(processInstanceId);
         this.getNowNode(task);
         this.getNextNode(task);
+        Map vars = new HashMap<>();
+        vars.put("days", 7);
+        //设置当前task的变量
+        taskService.setVariablesLocal(task.getId(), vars);
+        Map<String, Object> map = task.getTaskLocalVariables();
+        System.out.println(map);
+        //获取变量值
+        Map<String, Object> variables = taskService.getVariables(task.getId());
+        //这个task下面有两个节点
         this.completeTask(task);
         log.debug("<============结束流转第一个节点");
         log.debug("============>开始流转第二个节点");
@@ -336,6 +368,7 @@ public class AddFlow {
         this.getTaskHistory(processInstanceId);
         this.getAssignee(processInstanceId);
         Task task2 = this.getTask(processInstanceId);
+        variables = taskService.getVariables(task2.getId());
         this.completeTask(task2);
         log.debug("<============结束流转第二个节点");
     }
@@ -389,9 +422,8 @@ public class AddFlow {
      * @param task
      */
     public void completeTask(Task task) {
-        Map vars = new HashMap<>();
-        vars.put("days", 7);
-        taskService.complete(task.getId(), vars);
+
+        taskService.complete(task.getId());
         log.debug("完成流程：", task.toString());
     }
 
@@ -458,6 +490,7 @@ public class AddFlow {
     public UserTask getNext(List<SequenceFlow> outFlows) {
         for (SequenceFlow sequenceFlow : outFlows) {
             FlowElement targetFlow = sequenceFlow.getTargetFlowElement();
+
             if(ObjectUtil.isNull(sequenceFlow.getConditionExpression())
                     || Boolean.valueOf(
                     String.valueOf(
@@ -491,10 +524,28 @@ public class AddFlow {
      */
     public static Object result(String exp) {
 
-        ExpressionParser parser = new SpelExpressionParser();
-        Expression expression = parser.parseExpression(exp, new TemplateParserContext());
-        String value = expression.getValue("4", String.class);
+        FelEngine fel = new FelEngineImpl();
+        FelContext ctx = fel.getContext();
+        ctx.set("days", 4);
+        Object value = fel.eval(exp);
         return value;
+    }
+
+
+    @Test
+    public void test2() {
+        //测试SpringEL解析器
+        //String template = "#{#user}";//设置文字模板,其中#{}表示表达式的起止，#user是表达式字符串，表示引用一个变量。
+        String template= "#{#user}";
+
+        FelEngine fel = new FelEngineImpl();
+        FelContext ctx = fel.getContext();
+        ctx.set("单价", 1.5898);
+        ctx.set("数量", 1);
+        ctx.set("运费", 75);
+
+        Object result = fel.eval("单价*数量+运费");
+        System.out.println(result);
     }
 
 }

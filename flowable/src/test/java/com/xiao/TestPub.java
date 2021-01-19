@@ -182,6 +182,5 @@ public class TestPub {
         } else {
             ProcessInstance processInstance = runtimeService.startProcessInstanceById(processId);
         }
-
     }
 }

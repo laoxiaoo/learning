@@ -59,6 +59,10 @@
             <!--<artifactId>mysql-connector-java</artifactId>-->
         <!--</dependency>-->
 
+        <dependency>
+            <groupId>org.eweb4j</groupId>
+            <artifactId>fel</artifactId>
+        </dependency>
 
     </dependencies>
 

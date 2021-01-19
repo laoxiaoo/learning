@@ -7,6 +7,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
@@ -43,7 +44,6 @@ public class ContentServiceImpl {
         sourceBuilder.query(termQueryBuilder);
         sourceBuilder.timeout(new TimeValue(30, TimeUnit.SECONDS));
         searchRequest.source(sourceBuilder);
-
         SearchResponse search = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
 
         List<Map<String, Object>> list = Arrays.stream(search.getHits().getHits()).map(SearchHit::getSourceAsMap).collect(Collectors.toList());
