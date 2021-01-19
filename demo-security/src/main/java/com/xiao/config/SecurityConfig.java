@@ -81,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //所有请求都必须通过认证
                 .anyRequest().access("@myServiceImpl.hasPermission(request, authentication)");
 
-        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+        //http.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
         http.csrf().disable();
     }
 }
