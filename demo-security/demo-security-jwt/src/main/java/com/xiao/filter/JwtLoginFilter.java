@@ -24,7 +24,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
         String password = super.obtainPassword(request);
         //创建未认证的凭证
         JwtLoginToken jwtLoginToken = new JwtLoginToken(username, password);
-
+        //设置请求地址，sessionid
         jwtLoginToken.setDetails(new WebAuthenticationDetails(request));
         //生成已认证的凭证
         Authentication authenticate = super.getAuthenticationManager().authenticate(jwtLoginToken);
