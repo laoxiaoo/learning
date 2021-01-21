@@ -35,10 +35,12 @@ public class JwtLoginToken extends AbstractAuthenticationToken {
      * @param principal
      * @param credentials
      */
-    public JwtLoginToken(Collection<? extends GrantedAuthority> authorities, Object principal, Object credentials) {
+    public JwtLoginToken(Object principal, Object credentials,
+                         Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;
+        super.setAuthenticated(true);
     }
 
     @Override
