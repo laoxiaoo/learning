@@ -21,7 +21,7 @@ public class JwtFilterInvocationSecurityMetadataSource implements FilterInvocati
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         List<ConfigAttribute> list = SecurityConfig.createList(new String[]{"admin"});
-        return null;
+        return list;
     }
 
     @Override

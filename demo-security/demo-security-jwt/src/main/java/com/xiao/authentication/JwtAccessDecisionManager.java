@@ -35,11 +35,11 @@ public class JwtAccessDecisionManager implements AccessDecisionManager {
 
     @Override
     public boolean supports(ConfigAttribute attribute) {
-        return true;
+        return false;
     }
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return true;
+        return false;
     }
 }
