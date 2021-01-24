@@ -1,6 +1,8 @@
 package com.xiao.filter;
 
 import com.xiao.authentication.JwtLoginToken;
+import com.xiao.util.JwtUtils;
+import io.jsonwebtoken.Claims;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -22,7 +24,8 @@ import java.io.IOException;
 public class JwtTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
+        String token = request.getHeader("authorization");
+        Claims claims = JwtUtils.verifyJwt(token);
         JwtLoginToken jwtLoginToken = new JwtLoginToken("user", null, null);
         jwtLoginToken.setDetails(new WebAuthenticationDetails(request));
         SecurityContextHolder.getContext().setAuthentication(jwtLoginToken);

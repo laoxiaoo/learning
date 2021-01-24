@@ -1,4 +1,4 @@
-package com.xiao;
+package com.xiao.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,8 @@ public class IndexController {
     @PostMapping("/index")
     public String index() {
         log.debug("==> 进入index");
-        return "get index";
+        throw new RuntimeException("index error");
+        //return "get index";
     }
 
 }

@@ -4,3 +4,11 @@ server:
 logging:
   level:
     root: debug
+
+
+spring:
+  datasource:
+    #    username: root
+    #    password: 123456
+    url: jdbc:sqlite::resource:database/security.db
+    driver-class-name: org.sqlite.JDBC

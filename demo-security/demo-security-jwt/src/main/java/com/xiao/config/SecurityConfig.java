@@ -92,6 +92,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .addFilterAt(jwtLoginFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(new JwtTokenFilter(), JwtLoginFilter.class);;
+                .addFilterAfter(new JwtTokenFilter(), JwtLoginFilter.class);
     }
 }

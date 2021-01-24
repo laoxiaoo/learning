@@ -1,5 +1,8 @@
 package com.xiao.authentication;
 
+import cn.hutool.json.JSONObject;
+import com.xiao.util.JwtUtils;
+import com.xiao.util.ResultUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -20,9 +23,12 @@ public class JwtLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandle
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-        response.setContentType("application/json;charset=UTF-8");
+        JwtUserDetails userDetails = (JwtUserDetails) authentication.getPrincipal();
         //签发token
-        response.getWriter().write("{\"data\": \"aaaaa\"}");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.set("data", JwtUtils.generateToken(userDetails.getUserId(), userDetails.getUsername()));
+        jsonObject.set("status", 200);
+        ResultUtil.ResultOk(jsonObject.toString(), response);
     }
 
 }
