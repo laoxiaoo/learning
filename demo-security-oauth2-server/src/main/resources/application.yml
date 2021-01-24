@@ -1,6 +1,10 @@
 server:
+<<<<<<< HEAD
   port: 81
 
 logging:
   level:
     root: debug
+=======
+  port: 81
+>>>>>>> 951f37b8b40436690eb062c35e676b31884acd93
