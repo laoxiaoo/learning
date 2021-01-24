@@ -6,5 +6,8 @@ server:
 #    user:
 #      name: test
 #      password: test
+<<<<<<< HEAD
 logging:
   level: debug
+=======
+>>>>>>> 951f37b8b40436690eb062c35e676b31884acd93
