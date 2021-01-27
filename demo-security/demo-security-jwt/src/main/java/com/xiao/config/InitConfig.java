@@ -1,8 +1,13 @@
 package com.xiao.config;
 
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.jmx.export.annotation.ManagedResource;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Indexed;
 
 import javax.annotation.PostConstruct;
+import java.text.DateFormat;
 
 /**
  * @author lonely xiao
@@ -17,6 +22,5 @@ public class InitConfig {
 
     @PostConstruct
     public void init() {
-
     }
 }
