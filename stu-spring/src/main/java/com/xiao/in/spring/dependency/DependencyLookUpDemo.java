@@ -19,10 +19,12 @@ import java.util.Map;
  */
 public class DependencyLookUpDemo {
     public static void main(String[] args) {
-        BeanFactory beanFactory = new AnnotationConfigApplicationContext(DependencyLookUpConfig.class);
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(DependencyLookUpConfig.class);
+        BeanFactory beanFactory = annotationConfigApplicationContext;
         //lookUpLazyTime(beanFactory);
         //lookUpRealTime(beanFactory);
-        
+        System.out.println(annotationConfigApplicationContext.getBeanFactory());
+        System.out.println(beanFactory);
         lookUpByAnnotation(beanFactory);
     }
 
