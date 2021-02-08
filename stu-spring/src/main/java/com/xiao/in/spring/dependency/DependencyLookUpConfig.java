@@ -25,6 +25,7 @@ public class DependencyLookUpConfig {
         return new SuperPerson();
     }
 
+
     @Bean
     public ObjectFactoryCreatingFactoryBean objectFactory() {
         ObjectFactoryCreatingFactoryBean objectFactory = new ObjectFactoryCreatingFactoryBean();

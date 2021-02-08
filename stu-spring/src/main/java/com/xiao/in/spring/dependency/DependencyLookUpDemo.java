@@ -53,6 +53,7 @@ public class DependencyLookUpDemo {
      * @param beanFactory
      */
     static void lookUpLazyTime(BeanFactory beanFactory) {
+        // 获取ObjectFactoryCreatingFactoryBean的bean
         ObjectFactory<Person> bean = beanFactory.getBean(ObjectFactory.class);
         System.out.println(bean.getObject());
     }
