@@ -1,6 +1,7 @@
 package com.xiao.pojo;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.beans.factory.InitializingBean;
@@ -17,21 +18,15 @@ import javax.annotation.PostConstruct;
 @Getter
 @Setter
 @ToString
-public class Person implements InitializingBean {
+@NoArgsConstructor
+public class Person {
     private String name;
     private Integer age;
 
-    @PostConstruct
-    public void postInit() {
-        System.out.println("==> PostConstruct init");
+    public Person(Integer age) {
+        this.age = age;
     }
-
-    public void initMethod() {
-        System.out.println("==> init method");
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println("==> afterPropertiesSet init");
+    public Person(String name) {
+        this.name = name;
     }
 }
