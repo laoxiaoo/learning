@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:persons="http://www.xiao.org/schema/persons"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.xiao.org/schema/persons
+        http://www.xiao.org/schema/persons.xsd
+">
+   <persons:person id="1" name="老肖" age="1"></persons:person>
+</beans>
