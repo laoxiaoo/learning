@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.dao.TRoleDao">
+
+    <select id="getRoleByUserId" resultType="com.xiao.entity.TRole">
+        select tr.* from t_role tr
+        left join t_role_user tru
+        where tru.user_id=#{userId}
+    </select>
+</mapper>

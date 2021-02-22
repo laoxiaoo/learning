@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<xsd:schema xmlns="http://www.xiao.org/schema/persons"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.xiao.org/schema/persons">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <!--定义复杂类型（person）-->
+    <xsd:complexType name="Person">
+        <xsd:attribute name="id" type="xsd:string" use="required"></xsd:attribute>
+        <!-- 必须填写-->
+        <xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+        <xsd:attribute name="age" type="xsd:integer" ></xsd:attribute>
+    </xsd:complexType>
+
+    <!--定义person 元素-->
+    <xsd:element name="person" type="Person"></xsd:element>
+</xsd:schema>

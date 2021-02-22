@@ -3,6 +3,7 @@ package com.xiao.config;
 import com.xiao.authentication.JwtAuthenticationProvider;
 import com.xiao.authentication.JwtUserDetailsService;
 import com.xiao.filter.JwtLoginFilter;
+import com.xiao.filter.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -76,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O object) {
                         //初始化获取到有资格访问当前页面的角色列表
-                        object.setSecurityMetadataSource(metadataSource);
+                        //sobject.setSecurityMetadataSource(metadataSource);
                         //初始化校验当前用户是否具备所需要的角色
                         object.setAccessDecisionManager(accessDecisionManager);
                         return object;
@@ -90,6 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .csrf().disable()
-                .addFilterAt(jwtLoginFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(jwtLoginFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new JwtTokenFilter(), JwtLoginFilter.class);
     }
 }

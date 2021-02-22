@@ -1,0 +1,4 @@
+person:
+  (class): com.xiao.pojo.Person
+  id: 1
+  name: 老肖
