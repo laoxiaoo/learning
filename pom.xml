@@ -49,6 +49,7 @@
         <module>demo-oauth2-security</module>
         <module>demo-security-oauth2-server</module>
         <module>stu-spring</module>
+        <module>stu-java-base</module>
     </modules>
 
     <properties>
