@@ -19,13 +19,13 @@ import java.util.Optional;
 @Slf4j
 public class WorkWechatCallbackUtils {
 
-    public static String suiteSecret = "VkBOtkLz7FXK2mCXNpLm4DFWl7hGFqfxhdg0lQfkrTA";
-    private static String token = "MyHdxISXW6wYB9LtejH";
-    private static String key = "5zWYh8pKwLNYrOJESipGgFKPSvoFUETWmx9hwETO8x8";
-    public static String appId = "wxf91db4767d784dc5";
-    public static String corpId = "wx9e5b475eab25beff";
+    public static String suiteSecret = "";
+    private static String token = "";
+    private static String key = "";
+    public static String appId = "";
+    public static String corpId = "";
 
-    public static String providerSecret = "2hLZuoLL2bXG_XmeidtkvAC9vfzFJtTjg7lUhzgMjKGfIafGxvcQbyXwPQijMhd_";
+    public static String providerSecret = "";
 
     private static WXBizMsgCrypt crypt;
 
