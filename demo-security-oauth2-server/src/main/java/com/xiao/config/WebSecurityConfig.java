@@ -27,11 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-<<<<<<< HEAD
-=======
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
     }
->>>>>>> 951f37b8b40436690eb062c35e676b31884acd93
 }
