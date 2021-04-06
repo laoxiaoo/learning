@@ -44,11 +44,11 @@
         <module>mybatis</module>
         <module>callback</module>
         <module>log</module>
-        <module>demo-security</module>
         <module>demo-shiro</module>
         <module>demo-oauth2-security</module>
         <module>demo-security-oauth2-server</module>
         <module>stu-spring</module>
+        <module>stu-spring-boot</module>
         <module>stu-java-base</module>
         <module>stu-redis</module>
         <module>stu-redis-spring-boot</module>
@@ -75,6 +75,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
 
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>
