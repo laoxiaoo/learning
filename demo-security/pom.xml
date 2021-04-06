@@ -8,15 +8,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-<<<<<<< HEAD
     <packaging>pom</packaging>
     <description>security学习代码</description>
     <modules>
         <module>demo-security-jwt</module>
     </modules>
-=======
-    <description>security学习代码</description>
->>>>>>> 951f37b8b40436690eb062c35e676b31884acd93
 
     <artifactId>security</artifactId>
 

@@ -50,6 +50,8 @@
         <module>demo-security-oauth2-server</module>
         <module>stu-spring</module>
         <module>stu-java-base</module>
+        <module>stu-redis</module>
+        <module>stu-redis-spring-boot</module>
     </modules>
 
     <properties>
@@ -159,6 +161,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>3.5.2</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>
