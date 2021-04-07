@@ -44,7 +44,6 @@
         <module>mybatis</module>
         <module>callback</module>
         <module>log</module>
-        <module>demo-security</module>
         <module>demo-shiro</module>
         <module>demo-oauth2-security</module>
         <module>demo-security-oauth2-server</module>
@@ -133,15 +132,12 @@
             </dependency>
 
             <dependency>
-<<<<<<< HEAD
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>3.4.2</version>
             </dependency>
 
             <dependency>
-=======
->>>>>>> 951f37b8b40436690eb062c35e676b31884acd93
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
                 <version>3.13.5</version>
