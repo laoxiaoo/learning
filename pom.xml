@@ -44,19 +44,10 @@
         <module>mybatis</module>
         <module>callback</module>
         <module>log</module>
+        <module>demo-security</module>
         <module>demo-shiro</module>
         <module>demo-oauth2-security</module>
         <module>demo-security-oauth2-server</module>
-        <module>stu-spring</module>
-        <module>stu-spring-boot</module>
-        <module>stu-java-base</module>
-<<<<<<< HEAD
-        <module>demo-jackson</module>
-        <module>pdf-util</module>
-=======
-        <module>stu-redis</module>
-        <module>stu-redis-spring-boot</module>
->>>>>>> 0896094c193abd65778555cd6a0286727b387827
     </modules>
 
     <properties>
@@ -69,7 +60,6 @@
         <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
         <elasticsearch.version>7.9.2</elasticsearch.version>
         <flowable.version>6.5.0</flowable.version>
-        <jodconverter.version>4.2.2</jodconverter.version>
     </properties>
 
     <dependencyManagement>
@@ -81,7 +71,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
 
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>
@@ -144,12 +133,15 @@
             </dependency>
 
             <dependency>
+<<<<<<< HEAD
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>3.4.2</version>
             </dependency>
 
             <dependency>
+=======
+>>>>>>> 951f37b8b40436690eb062c35e676b31884acd93
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
                 <version>3.13.5</version>
@@ -168,26 +160,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <dependency>
-<<<<<<< HEAD
-                <groupId>org.jodconverter</groupId>
-                <artifactId>jodconverter-local</artifactId>
-                <version>4.2.2</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jodconverter</groupId>
-                <artifactId>jodconverter-spring-boot-starter</artifactId>
-                <version>4.2.2</version>
-            </dependency>
-=======
-                <groupId>redis.clients</groupId>
-                <artifactId>jedis</artifactId>
-                <version>3.5.2</version>
-            </dependency>
-
->>>>>>> 0896094c193abd65778555cd6a0286727b387827
         </dependencies>
     </dependencyManagement>
 </project>
