@@ -42,6 +42,8 @@ public class BpmnModelBuilder {
     private final String startNodeType = "start";
     private final String endNodeType = "end";
     private final String candidateNodeName = "candidates";
+    private final String copyUserNode = "copyUser";
+    private final String copyDeptNode = "copyDept";
 
     /**
      * 处理人角色前缀
@@ -57,13 +59,22 @@ public class BpmnModelBuilder {
      */
     public final static String CANDIDATE_DEPART_PREFIX = "depart::";
 
+
     /**
      * 表单字段节点名称
      */
     public final static String COLUMN_NAME = "tableColumn";
 
+    /**
+     * 抄送用户的节点名称
+     */
+    public final static String COPY_USER_ID = "tableCopyUser";
+
     public final static String COLUMN_ATTR_NAME = "columnId";
 
+    public final static String COPY_ATTR_USER_ID = "copyUserId";
+
+    public final static String COPY_ATTR_DEPT_ID = "copyDeptId";
 
     /**
      * 当前节点处理人：角色集合
@@ -167,6 +178,7 @@ public class BpmnModelBuilder {
                 userTasks.add(userTask);
             }
         }
+        userTasks.get(0).addExtensionElement(setCopyUsers("1,3,4,5,6", "256，14"));
         return this;
     }
 
@@ -296,5 +308,20 @@ public class BpmnModelBuilder {
                 }).collect(Collectors.toList());
         return extensionElements;
     }
+
+    private ExtensionElement setCopyUsers(String users, String depts){
+        ExtensionAttribute user = new ExtensionAttribute();
+        user.setName(COPY_ATTR_USER_ID);
+        user.setValue(users);
+        ExtensionAttribute dept = new ExtensionAttribute();
+        dept.setName(COPY_ATTR_DEPT_ID);
+        dept.setValue(depts);
+        ExtensionElement extensionElement = new ExtensionElement();
+        extensionElement.setName("flowable:"+COPY_USER_ID);
+        extensionElement.addAttribute(user);
+        extensionElement.addAttribute(dept);
+        return extensionElement;
+    }
+
 
 }

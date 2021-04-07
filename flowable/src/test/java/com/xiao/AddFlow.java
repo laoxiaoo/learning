@@ -72,6 +72,8 @@ import java.util.stream.Stream;
  * 3 完成 Task，当他将任务做完后可以将该Task结束，API如下
  *
  * taskService.complete(task.getId());
+ *
+ *
  * @program: learning
  * @description: TODO
  * @author: lonely xiao
@@ -350,7 +352,7 @@ public class AddFlow {
         this.getTaskHistory(processInstanceId);
         this.getAssignee(processInstanceId);
         Task task = this.getTask(processInstanceId);
-        this.getNowNode(task);
+        this.getCopyUsers(task);
         this.getNextNode(task);
         Map vars = new HashMap<>();
         vars.put("days", 7);
@@ -368,6 +370,7 @@ public class AddFlow {
         this.getTaskHistory(processInstanceId);
         this.getAssignee(processInstanceId);
         Task task2 = this.getTask(processInstanceId);
+
         variables = taskService.getVariables(task2.getId());
         this.completeTask(task2);
         log.debug("<============结束流转第二个节点");
@@ -472,6 +475,16 @@ public class AddFlow {
                 }
             }
         }*/
+    }
+
+    public void getCopyUsers (Task task) {
+        Execution execution = runtimeService.createExecutionQuery().executionId(task.getExecutionId()).singleResult();
+        String currentActivityId = execution.getActivityId();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(task.getProcessDefinitionId());
+        FlowNode flowNode = (FlowNode) bpmnModel.getFlowElement(currentActivityId);
+        Map<String, List<ExtensionElement>> extensionElements = flowNode.getExtensionElements();
+        List<ExtensionElement> extensionElements1 = extensionElements.get(BpmnModelBuilder.COPY_USER_ID);
+        System.out.println(extensionElements1.toString());
     }
 
     public void getNextNode(Task task) {
