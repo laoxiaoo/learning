@@ -50,8 +50,13 @@
         <module>stu-spring</module>
         <module>stu-spring-boot</module>
         <module>stu-java-base</module>
+<<<<<<< HEAD
         <module>demo-jackson</module>
         <module>pdf-util</module>
+=======
+        <module>stu-redis</module>
+        <module>stu-redis-spring-boot</module>
+>>>>>>> 0896094c193abd65778555cd6a0286727b387827
     </modules>
 
     <properties>
@@ -165,6 +170,7 @@
             </dependency>
 
             <dependency>
+<<<<<<< HEAD
                 <groupId>org.jodconverter</groupId>
                 <artifactId>jodconverter-local</artifactId>
                 <version>4.2.2</version>
@@ -175,6 +181,13 @@
                 <artifactId>jodconverter-spring-boot-starter</artifactId>
                 <version>4.2.2</version>
             </dependency>
+=======
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>3.5.2</version>
+            </dependency>
+
+>>>>>>> 0896094c193abd65778555cd6a0286727b387827
         </dependencies>
     </dependencyManagement>
 </project>
