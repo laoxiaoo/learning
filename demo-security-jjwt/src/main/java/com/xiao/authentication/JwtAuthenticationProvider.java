@@ -1,7 +1,9 @@
 package com.xiao.authentication;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +24,8 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
     private PasswordEncoder passwordEncoder;
 
+    private AuthenticationManager authenticationManager;
+
     public JwtAuthenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
@@ -33,6 +37,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         log.debug("==> 获取用户密码");
         //转换authentication
         JwtLoginToken jwtLoginToken = (JwtLoginToken) authentication;
+        additionalAuthenticationChecks(userDetails, jwtLoginToken);
         //构造已认证的authentication
         JwtLoginToken authenticatedToken = new JwtLoginToken(userDetails, jwtLoginToken.getCredentials(), userDetails.getAuthorities());
         authenticatedToken.setDetails(jwtLoginToken.getDetails());
@@ -47,5 +52,22 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     @Override
     public boolean supports(Class<?> authentication) {
         return JwtLoginToken.class.isAssignableFrom(authentication);
+    }
+
+    /**
+     * 检查密码是否正确
+     *
+     * @param userDetails
+     * @param authentication
+     * @throws AuthenticationException
+     */
+    private void additionalAuthenticationChecks(UserDetails userDetails, JwtLoginToken authentication) throws AuthenticationException {
+        if (authentication.getCredentials() == null) {
+            throw new BadCredentialsException("Bad credentials");
+        }
+        String presentedPassword = authentication.getCredentials().toString();
+        if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {
+            throw new BadCredentialsException("Bad credentials");
+        }
     }
 }

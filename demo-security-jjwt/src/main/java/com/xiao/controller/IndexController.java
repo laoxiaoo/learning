@@ -20,8 +20,8 @@ public class IndexController {
     @PostMapping("/index")
     public String index() {
         log.debug("==> 进入index");
-        throw new RuntimeException("index error");
-        //return "get index";
+        //throw new RuntimeException("index error");
+        return "get index";
     }
 
 }
