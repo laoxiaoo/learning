@@ -42,6 +42,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println(userService.list());
         TUser user = userService.getOne(new QueryWrapper<TUser>().lambda().eq(TUser::getLoginAccount, username));
         Optional.ofNullable(user).orElseThrow(() -> new RuntimeException("用户不存在"));
         List<TRole> roles = roleService.getRoleByUserId(user.getId());

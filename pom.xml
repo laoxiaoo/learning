@@ -43,10 +43,12 @@
         <module>flowable</module>
         <module>mybatis</module>
         <module>callback</module>
+        <module>pdf-util</module>
         <module>log</module>
         <module>demo-shiro</module>
         <module>demo-oauth2-security</module>
         <module>demo-security-oauth2-server</module>
+        <module>demo-security-jjwt</module>
     </modules>
 
     <properties>
@@ -149,6 +151,17 @@
                 <version>0.8</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.jodconverter</groupId>
+                <artifactId>jodconverter-local</artifactId>
+                <version>4.2.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jodconverter</groupId>
+                <artifactId>jodconverter-spring-boot-starter</artifactId>
+                <version>4.2.2</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
