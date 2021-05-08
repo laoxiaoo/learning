@@ -31,7 +31,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().permitAll()
                 .and().authorizeRequests()
-                .antMatchers("/login", "/oauth/authorize", "/oauth/token").permitAll()
+                .antMatchers("/login",
+                        "/oauth/authorize",
+                        "/oauth/token",
+                        "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs",
+                        "/doc.html", "/webjars/**", "/favicon.ico")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable();
     }

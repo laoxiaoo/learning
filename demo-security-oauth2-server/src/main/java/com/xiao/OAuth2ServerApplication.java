@@ -33,10 +33,10 @@ public class OAuth2ServerApplication {
                         "Profile(s): \t{}\n----------------------------------------------------------",
                 env.getProperty("spring.application.name"),
                 protocol,
-                env.getProperty("server.port") + "/api/swagger-ui.html",
+                env.getProperty("server.port") + "/swagger-ui.html",
                 protocol,
                 InetAddress.getLocalHost().getHostAddress(),
-                env.getProperty("server.port") + "/api/swagger-ui.html",
+                env.getProperty("server.port") + "/swagger-ui.html",
                 env.getActiveProfiles());
     }
 
