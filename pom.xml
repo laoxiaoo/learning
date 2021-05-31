@@ -49,6 +49,8 @@
         <module>demo-oauth2-security</module>
         <module>demo-security-oauth2-server</module>
         <module>demo-security-jjwt</module>
+        <module>stu-activemq</module>
+        <module>stu-rabbitmq</module>
     </modules>
 
     <properties>
@@ -189,6 +191,11 @@
                 <version>3.0.2</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-all</artifactId>
+                <version>5.15.15</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
