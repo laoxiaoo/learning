@@ -1,0 +1,25 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: dubbo-nacos-provider
+
+nacos:
+  server-address: 127.0.0.1
+  port: 8848
+  username: nacos
+  password: nacos
+
+dubbo:
+  scan:
+    base-packages: com.xiao.manager
+  registry:
+    address: nacos://${nacos.server-address}:${nacos.port}/?username=${nacos.username}&password=${nacos.password}
+  protocol:
+    port: -1
+    name: dubbo
+
+logging:
+  level:
+    com.xiao: debug

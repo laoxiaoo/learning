@@ -1,7 +1,6 @@
 
 package com.xiao.config;
 
-import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +18,7 @@ import java.util.List;
 
 @Configuration
 @EnableOpenApi
-@EnableKnife4j
+//@EnableKnife4j
 public class SwaggerConfig {
 
     @Bean

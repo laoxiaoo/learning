@@ -51,6 +51,7 @@
         <module>demo-security-jjwt</module>
         <module>stu-activemq</module>
         <module>stu-rabbitmq</module>
+        <module>stu-spring-boot-dubbo</module>
     </modules>
 
     <properties>
