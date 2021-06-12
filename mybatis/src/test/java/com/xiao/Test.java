@@ -2,6 +2,7 @@ package com.xiao;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.text.csv.CsvUtil;
 import cn.hutool.core.util.IdUtil;
 import com.xiao.dao.StudentMapper;
 import com.xiao.pojo.Student;
@@ -93,7 +94,6 @@ public class Test {
     }
 
     public void testConnect() {
-
     }
 
     public void testMateObj() {
@@ -128,6 +128,9 @@ public class Test {
         log.debug(student.toString());
     }
 
+    /**
+     * 测试雪花算法
+     */
     @org.junit.Test
     public void snowFlack() {
         Snowflake snowflake = IdUtil.getSnowflake(1, 1);
@@ -140,6 +143,7 @@ public class Test {
         System.out.println(snowflake.nextId());
         System.out.println(snowflake.nextId());
         System.out.println(snowflake.nextId());
+
     }
 
 }

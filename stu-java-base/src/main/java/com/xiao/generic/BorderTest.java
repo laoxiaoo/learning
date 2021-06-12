@@ -8,15 +8,21 @@ package com.xiao.generic;
  */
 public class BorderTest {
 
-    static class Border1<T extends Integer> {
-    }
 
-    static class Border2<T extends String> {
-    }
     public static void main(String[] args) {
-        Border1<Integer> border1 = new Border1<>();
         Border2<String> border2 = new Border2<>();
-        System.out.println(border1.getClass().equals(border2.getClass()));
+        String a = "aaa";
+        border2.setT(a);
     }
 
+}
+class Border1<T extends Integer> {
+}
+
+class Border2<T extends String> {
+    T t;
+    public T setT(T t){
+        this.t = t;
+        return this.t;
+    }
 }
