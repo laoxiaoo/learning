@@ -28,13 +28,14 @@ public class NIOServer {
         while (true) {
             //1s没有获取到事件就重新获取
             if(selector.select(1000) == 0) {
-                System.out.println("没有人连接....");
+                //System.out.println("没有人连接....");
                 continue;
             }
             //获取发生的事件集合
             Iterator<SelectionKey> keys = selector.selectedKeys().iterator();
             while (keys.hasNext()) {
                 SelectionKey key = keys.next();
+                keys.remove();
                 //如果是连接事件，注册读事件,并关联一个buffer
                 if(key.isAcceptable()){
                     //有新的客户端连接，注册一个生成一个socket，注册一个读事件
@@ -43,12 +44,17 @@ public class NIOServer {
                     socketChannelRead.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024));
                 }
                 if(key.isReadable()) {
-                    SocketChannel channel = (SocketChannel) key.channel();
-                    ByteBuffer buffer = (ByteBuffer) key.attachment();
-                    channel.read(buffer);
-                    System.out.println("客户端传来： "+ new String(buffer.array()));
+                    try {
+                        SocketChannel channel = (SocketChannel) key.channel();
+                        ByteBuffer buffer = (ByteBuffer) key.attachment();
+                        channel.read(buffer);
+                        System.out.println("客户端传来： "+ new String(buffer.array()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        key.cancel();
+                    }
                 }
-                keys.remove();
             }
         }
     }

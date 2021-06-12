@@ -21,10 +21,8 @@ public class NIOClient {
         Selector selector = Selector.open();
         //打开套字接通道
         SocketChannel channel = SocketChannel.open();
-
         //设置非阻塞
         channel.configureBlocking(false);
-        ;
         //注册通道，设置为链接就绪
         channel.register(selector, SelectionKey.OP_CONNECT);
         //绑定IP，端口
@@ -35,6 +33,6 @@ public class NIOClient {
         }
         ByteBuffer byteBuffer = ByteBuffer.wrap("hello, 老肖".getBytes());
         channel.write(byteBuffer);
-        System.out.println("写入完毕");
+            System.out.println("写入完毕");
     }
 }
