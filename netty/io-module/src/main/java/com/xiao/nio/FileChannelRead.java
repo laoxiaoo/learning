@@ -11,12 +11,24 @@ import java.nio.channels.FileChannel;
  */
 public class FileChannelRead {
     public static void main(String[] args) throws Exception {
-        File file = new File("d:\\file1.txt");
+        File file = new File("d:\\1.txt");
         FileInputStream fileInputStream = new FileInputStream(file);
         FileChannel channel = fileInputStream.getChannel();
-        ByteBuffer byteBuffer = ByteBuffer.allocate((int) file.length());
-        channel.read(byteBuffer);
-        System.out.println(new String(byteBuffer.array()));
+        ByteBuffer buffer = ByteBuffer.allocate(10);
+        while (true) {
+            int read = channel.read(buffer);
+            if(read == -1) {
+                break;
+            }
+            //切换读模式
+            buffer.flip();
+            //查询是否还有数据没读
+            while (buffer.hasRemaining()) {
+                System.out.println((char) buffer.get());
+            }
+            //清空缓存区
+            buffer.clear();
+        }
     }
 
 }

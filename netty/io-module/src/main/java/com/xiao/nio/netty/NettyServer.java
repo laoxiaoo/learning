@@ -1,10 +1,7 @@
 package com.xiao.nio.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -20,7 +17,7 @@ public class NettyServer {
 
     public static void main(String[] args) throws InterruptedException {
         //管理连接
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workGroup = new NioEventLoopGroup();
 
         //服务器启动对象
@@ -41,7 +38,7 @@ public class NettyServer {
                     }
                 });
         //绑定一个端口并且同步
-        ChannelFuture sync = bootstrap.bind(6666).sync();
+        ChannelFuture sync = bootstrap.bind(80).sync();
         sync.addListener((future) -> {
             if(future.isSuccess()) {
                 System.out.println("绑定端口 6666 成功....");

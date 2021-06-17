@@ -26,13 +26,14 @@ public class NIOClient {
         //注册通道，设置为链接就绪
         channel.register(selector, SelectionKey.OP_CONNECT);
         //绑定IP，端口
-        if(!channel.connect(new InetSocketAddress("127.0.0.1", 7070))){
+        if(!channel.connect(new InetSocketAddress("127.0.0.1", 80))){
             while (!channel.finishConnect()) {
                 System.out.println("客户端还未连接，不会阻塞，可以做其他事");
             }
         }
         ByteBuffer byteBuffer = ByteBuffer.wrap("hello, 老肖".getBytes());
         channel.write(byteBuffer);
-            System.out.println("写入完毕");
+        System.out.println("写入完毕");
+        channel.close();
     }
 }
