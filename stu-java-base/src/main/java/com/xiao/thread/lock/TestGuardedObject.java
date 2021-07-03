@@ -6,6 +6,11 @@ import java.sql.Time;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 保护性暂停模式
+ * <ul>
+ *     一个线程等待另一个线程结束获取其结果
+ * </ul>
+ *
  * @author xiao ji hao
  * @create 2021年06月20日 21:42:00
  */

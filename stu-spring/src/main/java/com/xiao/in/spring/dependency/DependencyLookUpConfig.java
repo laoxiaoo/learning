@@ -1,6 +1,6 @@
 package com.xiao.in.spring.dependency;
 
-import com.xiao.pojo.Person;
+import com.xiao.aop.cglib.Person;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean;

@@ -13,6 +13,7 @@
 
     <modules>
         <module>stu-redis-jedis</module>
+        <module>stu-redis-spring-boot</module>
     </modules>
 
     <properties>

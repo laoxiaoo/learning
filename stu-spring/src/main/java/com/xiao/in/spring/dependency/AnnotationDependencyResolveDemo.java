@@ -1,7 +1,7 @@
 package com.xiao.in.spring.dependency;
 
-import com.xiao.in.spring.dependency.annotation.InjectPerson;
-import com.xiao.pojo.Person;
+import com.xiao.aop.cglib.Person;
+import com.xiao.in.spring.dependency.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

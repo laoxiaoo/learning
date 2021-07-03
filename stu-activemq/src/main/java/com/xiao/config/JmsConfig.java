@@ -21,7 +21,7 @@ import java.util.Properties;
 @Configuration
 public class JmsConfig {
 
-    public final static String URL = "tcp://192.168.10.134:61616";
+    public final static String URL = "tcp://192.168.1.131:61616";
 
     @Bean
     public PooledConnectionFactory jmsFactory(){

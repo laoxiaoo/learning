@@ -1,4 +1,4 @@
-/*
+
 package com.xiao;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -7,13 +7,13 @@ import org.junit.Test;
 import javax.jms.*;
 import java.util.Enumeration;
 
-*/
+
 /**
  * @author malone xiao
  * @ClassName Test1.java
  * @Description
  * @createTime 2021年05月25日 10:51:00
- *//*
+ */
 
 public class Test1 {
 
@@ -165,4 +165,4 @@ public class Test1 {
 
 
 }
-*/
+

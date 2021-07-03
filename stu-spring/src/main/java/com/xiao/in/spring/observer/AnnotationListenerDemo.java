@@ -9,10 +9,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 
 /**
- * @author lonely xiao
- * @version 1.0
- * @ClassName AnnotationListenerDemo.java
- * @Description
+ * Spring 的事件监听
  * @createTime 2021年02月21日 15:13:00
  */
 public class AnnotationListenerDemo implements ApplicationEventPublisherAware {

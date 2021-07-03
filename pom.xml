@@ -52,6 +52,8 @@
         <module>stu-activemq</module>
         <module>stu-rabbitmq</module>
         <module>stu-spring-boot-dubbo</module>
+        <module>demo-spring-cloud</module>
+        <module>demo-spring-boot</module>
     </modules>
 
     <properties>

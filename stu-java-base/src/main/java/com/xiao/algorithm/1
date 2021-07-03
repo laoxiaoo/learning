@@ -1,0 +1,28 @@
+int last=0;
+int lastCount=0;
+for(int num : array){
+    if(lastCount==0){
+        last=num;
+        lastCount=1;
+    }else{
+        if(last==num){
+            lastCount++;
+        }else{
+            lastCount--;
+        }
+    }
+}
+if(lastCount==0){
+    return 0;
+}else{
+    lastCount=1;
+    for(int num : array){
+        if(num == last){
+            lastCount++;
+        }
+    }
+}
+if(lastCount> (array.length>>1)){
+    return last;
+}
+return 0;

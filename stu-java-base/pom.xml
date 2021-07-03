@@ -8,8 +8,12 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
 
     <description>java学习代码</description>
+    <modules>
+        <module>stu-java9</module>
+    </modules>
 
     <artifactId>stu-java-base</artifactId>
 

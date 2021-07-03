@@ -26,4 +26,8 @@ public class Test1 {
         System.out.println(list1.getClass().equals(list2.getClass()));
     }
 
+    public void method1(int a) {
+
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.xiao.demo;
 
-import com.xiao.cglib.Person;
+import com.xiao.aop.cglib.Person;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 /**
  *
- *  {@link com.xiao.cglib.Person } beanInfo示例
+ *  {@link com.xiao.aop.cglib.Person } beanInfo示例
  * @author lonely xiao
  * @version 1.0
  * @ClassName BeanInfoDemo.java
