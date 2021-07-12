@@ -19,7 +19,7 @@ import javax.annotation.PostConstruct;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Person {
+public class Person implements InitializingBean {
     private String name;
     private Integer age;
 
@@ -28,5 +28,14 @@ public class Person {
     }
     public Person(String name) {
         this.name = name;
+    }
+
+    public void initMethod() {
+        System.out.println("=========>initMethod");
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("===>afterPropertiesSet");
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @createTime 2021年06月07日 17:47:00
  */
 @SpringBootApplication
+@EnableDubbo
 public class DubboConsumer {
 
     public static void main(String[] args) {

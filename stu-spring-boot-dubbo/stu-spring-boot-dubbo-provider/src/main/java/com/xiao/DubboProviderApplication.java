@@ -15,6 +15,7 @@ import java.net.InetAddress;
  */
 @SpringBootApplication
 @Slf4j
+@EnableDubbo
 public class  DubboProviderApplication {
 
     public static void main(String[] args) throws Exception {
