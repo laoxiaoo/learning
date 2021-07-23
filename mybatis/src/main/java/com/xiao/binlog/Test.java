@@ -1,7 +1,6 @@
 package com.xiao.binlog;
 
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+ import cn.hutool.json.JSONUtil;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.*;
 import com.github.shyiko.mysql.binlog.event.deserialization.EventDeserializer;

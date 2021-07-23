@@ -2,6 +2,9 @@ package com.xiao.dao;
 
 import com.xiao.pojo.Student;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @author 肖杰
@@ -18,4 +21,13 @@ public interface StudentMapper {
      * @return
      */
     Student selectStudent(@Param("id") Long id);
+
+    @Select("select * from student")
+    Student select(Student student);
+
+    /**
+     * 查询所有的学生信息
+     * @return
+     */
+    List<Student> selectAll();
 }

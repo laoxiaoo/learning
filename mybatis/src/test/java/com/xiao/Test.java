@@ -9,7 +9,10 @@ import com.xiao.pojo.Student;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.executor.BatchExecutor;
 import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.executor.ReuseExecutor;
+import org.apache.ibatis.executor.SimpleExecutor;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.apache.ibatis.mapping.Environment;
@@ -111,9 +114,15 @@ public class Test {
         //获取statement, 里面包含执行的xml，接口等信息
         MappedStatement mappedStatement = configuration.getMappedStatement("com.xiao.dao.StudentMapper.selectStudent");
         //获取执行器
-        Executor executor = configuration.newExecutor(new JdbcTransaction(sqlSession.getConnection()), ExecutorType.REUSE);
+        JdbcTransaction jdbcTransaction = new JdbcTransaction(sqlSession.getConnection());
+        ReuseExecutor executor = new ReuseExecutor(configuration, jdbcTransaction);
+        //Executor executor = configuration.newExecutor(new JdbcTransaction(sqlSession.getConnection()), ExecutorType.REUSE);
         List<Object> query = executor.query(mappedStatement, 2, RowBounds.DEFAULT, Executor.NO_RESULT_HANDLER);
         log.debug(cn.hutool.core.util.ArrayUtil.toString(query));
+        List<Object> query2 = executor.query(mappedStatement, 2, RowBounds.DEFAULT, Executor.NO_RESULT_HANDLER);
+        log.debug(cn.hutool.core.util.ArrayUtil.toString(query2));
+
+
     }
 
 
