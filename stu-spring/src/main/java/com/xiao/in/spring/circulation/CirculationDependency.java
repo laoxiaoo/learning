@@ -18,7 +18,7 @@ public class CirculationDependency {
 
         context.refresh();
         A a = context.getBean(A.class);
-
+        System.out.println(a);
         context.close();
     }
 

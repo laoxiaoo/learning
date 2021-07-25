@@ -14,4 +14,7 @@ public class A {
     @Autowired
     private B b;
 
+    @Autowired
+    private C c;
+
 }
