@@ -1,9 +1,9 @@
 package com.xiao.pojo;
 
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
+import java.io.Serializable;
 
 /**
  * @author 肖杰
@@ -15,9 +15,13 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-public class Student {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Student implements Serializable {
 
     private Long id;
 
     private String name;
+
+    private String phoneNumber;
 }

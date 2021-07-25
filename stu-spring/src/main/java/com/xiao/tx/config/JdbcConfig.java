@@ -16,8 +16,6 @@ import javax.sql.DataSource;
  * @create 2021年07月07日 21:39:00
  */
 @Configuration
-@ConditionalOnMissingBean()
-@AutoConfigureAfter
 public class JdbcConfig {
 
     @Bean
