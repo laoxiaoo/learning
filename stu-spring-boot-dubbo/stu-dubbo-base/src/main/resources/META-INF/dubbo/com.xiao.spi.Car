@@ -1,0 +1,2 @@
+car=com.xiao.spi.impl.CarImpl
+com.xiao.spi.aop.CarWrapper

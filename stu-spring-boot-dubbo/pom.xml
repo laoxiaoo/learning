@@ -20,6 +20,7 @@
         <module>stu-spring-boot-dubbo-provider</module>
         <module>stu-spring-boot-dubbo-consumer</module>
         <module>stu-spring-boot-dubbo-api</module>
+        <module>stu-dubbo-base</module>
     </modules>
 
     <artifactId>stu-spring-boot-dubbo</artifactId>
