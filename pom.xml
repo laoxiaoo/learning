@@ -53,6 +53,7 @@
         <module>stu-rabbitmq</module>
         <module>stu-spring-boot-dubbo</module>
         <module>demo-spring-boot</module>
+        <module>stu-rocketmq</module>
     </modules>
 
     <properties>
@@ -198,6 +199,13 @@
                 <artifactId>activemq-all</artifactId>
                 <version>5.15.15</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>4.9.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>
