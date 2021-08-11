@@ -1,0 +1,20 @@
+## test1 database
+spring:
+  datasource:
+    test1:
+      url: jdbc:h2:database/h2db1
+      username: sa
+      password: 123456
+      driver-class-name: org.h2.Driver
+## test2 database
+    test2:
+      url: jdbc:h2:database/h2db2
+      username: sa
+      password: 123456
+      driver-class-name: org.h2.Driver
+
+
+
+logging:
+  level:
+    com.xiao: debug

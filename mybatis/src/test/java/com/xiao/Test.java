@@ -42,7 +42,7 @@ import java.util.List;
 @Slf4j
 public class Test {
     //String url = "jdbc:h2:mem:";
-    String url = "jdbc:h2:database/mybatis_h2db";
+    String url = "jdbc:h2:database/h2db2";
     String username = "sa";
     String password = "123456";
     String sql;
@@ -58,7 +58,7 @@ public class Test {
             Class.forName("org.h2.Driver");
             connection = DriverManager.getConnection(url, username, password);
             ScriptRunner scriptRunner = new ScriptRunner(connection);
-            //scriptRunner.runScript(Resources.getResourceAsReader("create-table.sql"));
+            scriptRunner.runScript(Resources.getResourceAsReader("create-table.sql"));
             statement = connection.createStatement();
             statement.execute("insert into student(name) values('张三')");
             resultSet = statement.executeQuery("select * from student");
