@@ -43,7 +43,9 @@ public class DataSourceConfig2 {
                 // 设置mybatis的xml所在位置
                 new PathMatchingResourcePatternResolver()
                         .getResources("classpath*:dao/test02/*.xml"));
-        return bean.getObject();
+        SqlSessionFactory sqlSessionFactory = bean.getObject();
+        sqlSessionFactory.getConfiguration().setDefaultEnumTypeHandler(AutoEnumTypeHandler.class);
+        return sqlSessionFactory ;
     }
 
 
