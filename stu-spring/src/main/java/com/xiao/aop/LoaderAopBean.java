@@ -1,6 +1,9 @@
 package com.xiao.aop;
 
+import com.xiao.aop.adapter.HelloService;
+import com.xiao.aop.adapter.HelloServiceImpl;
 import com.xiao.aop.service.AopService;
+import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Conditional;
@@ -19,12 +22,11 @@ public class LoaderAopBean {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(LoaderAopBean.class);
         context.refresh();
+        /*AopService aopService = context.getBean(AopService.class);
 
-        AopService aopService = context.getBean(AopService.class);
-
-        aopService.sayHello();
-
-
+        aopService.sayHello();*/
+        HelloService bean = (HelloService) context.getBean("proxyBean");
+        bean.sayHello();
         context.close();
     }
 }
