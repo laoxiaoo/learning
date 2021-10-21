@@ -54,6 +54,7 @@
         <module>stu-spring-boot-dubbo</module>
         <module>demo-spring-boot</module>
         <module>stu-rocketmq</module>
+        <module>laoxiao-util</module>
     </modules>
 
     <properties>
