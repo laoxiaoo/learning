@@ -37,7 +37,7 @@ public class JacksonUtil {
      * @param <T>
      * @return
      */
-    public String toJsonString(Object value) {
+    public static String toJsonString(Object value) {
         String s;
         try {
             s = mapper.writeValueAsString(value);
@@ -45,6 +45,14 @@ public class JacksonUtil {
             throw new IllegalArgumentException(e);
         }
         return s;
+    }
+
+    public static <T> T toBean(String json, Class<T> clazz) {
+        try {
+            return mapper.readValue(json, clazz);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
 }

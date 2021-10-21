@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.xiao.entity.Person;
+import com.xiao.util.JacksonUtil;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -46,13 +47,15 @@ public class ObjectMapperDemo {
         Map<String, String> map = new HashMap<>(1);
         map.put("aaaa", "aaa");
         person.setMap(map);
-        String json = mapper.writeValueAsString(person);
+        //String json = mapper.writeValueAsString(person);
+        String json = JacksonUtil.toJsonString(person);
         System.out.println("==> 解析的json"+json);
     }
 
     private static void deserializeJSONStr() throws Exception {
         String json = "{ \"name\": \"laoxiao\", \"id\": 1, \"file_name\": \"测试中\", \"tests\": \"testsss\" }";
-        Person person = mapper.readValue(json, Person.class);
+       // Person person = mapper.readValue(json, Person.class);
+        Person person = JacksonUtil.toBean(json, Person.class);
         System.out.println("<==序列化的对象："+person);
     }
 
