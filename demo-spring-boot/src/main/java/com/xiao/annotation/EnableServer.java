@@ -1,9 +1,9 @@
-package xiao.annotation;
+package com.xiao.annotation;
 
 
 import org.springframework.context.annotation.Import;
-import xiao.bootstrap.ServerBeanDefinition;
-import xiao.server.Server;
+import com.xiao.bootstrap.ServerBeanDefinition;
+import com.xiao.server.Server;
 
 import java.lang.annotation.*;
 

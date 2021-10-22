@@ -1,12 +1,12 @@
-package xiao.bootstrap;
+package com.xiao.bootstrap;
 
 
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
-import xiao.annotation.EnableServer;
-import xiao.server.Server;
-import xiao.server.impl.FtpServerImpl;
-import xiao.server.impl.HttpServerImpl;
+import com.xiao.annotation.EnableServer;
+import com.xiao.server.Server;
+import com.xiao.server.impl.FtpServerImpl;
+import com.xiao.server.impl.HttpServerImpl;
 
 import java.util.Map;
 

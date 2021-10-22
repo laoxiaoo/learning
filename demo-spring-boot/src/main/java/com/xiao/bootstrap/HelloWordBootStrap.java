@@ -1,10 +1,10 @@
-package xiao.bootstrap;
+package com.xiao.bootstrap;
 
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import xiao.annotation.EnableHelloWord;
-import xiao.annotation.EnableServer;
-import xiao.server.Server;
+import com.xiao.annotation.EnableHelloWord;
+import com.xiao.annotation.EnableServer;
+import com.xiao.server.Server;
 
 /**
  * @author 肖杰

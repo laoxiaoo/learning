@@ -1,4 +1,4 @@
-package xiao.server;
+package com.xiao.server;
 
 /**
  * @author 肖杰

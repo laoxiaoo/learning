@@ -1,7 +1,7 @@
-package xiao.annotation;
+package com.xiao.annotation;
 
 import org.springframework.context.annotation.Import;
-import xiao.HelloWordConfig;
+import com.xiao.HelloWordConfig;
 
 import java.lang.annotation.*;
 

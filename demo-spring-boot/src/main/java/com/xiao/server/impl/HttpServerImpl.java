@@ -1,6 +1,7 @@
-package xiao.server.impl;
+package com.xiao.server.impl;
 
-import xiao.server.Server;
+
+import com.xiao.server.Server;
 
 /**
  * @author 肖杰
@@ -9,14 +10,14 @@ import xiao.server.Server;
  * @Description TODO
  * @createTime 2021年03月23日 09:06:00
  */
-public class FtpServerImpl implements Server {
+public class HttpServerImpl implements Server {
     @Override
     public void start() {
-        System.out.println("ftp start.....");
+        System.out.println("http start.....");
     }
 
     @Override
     public void stop() {
-        System.out.println("ftp end....");
+        System.out.println("http end....");
     }
 }

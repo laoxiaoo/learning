@@ -1,4 +1,4 @@
-package xiao;
+package com.xiao;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

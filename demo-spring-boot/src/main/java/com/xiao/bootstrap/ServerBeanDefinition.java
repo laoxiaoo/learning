@@ -1,4 +1,4 @@
-package xiao.bootstrap;
+package com.xiao.bootstrap;
 
 
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
-import xiao.server.impl.HttpServerImpl;
+import com.xiao.server.impl.HttpServerImpl;
 
 /**
  * @author 肖杰
