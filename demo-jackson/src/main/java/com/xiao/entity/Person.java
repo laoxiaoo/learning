@@ -6,10 +6,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.xiao.demo.IdJsonDeserializer;
 import com.xiao.demo.IdJsonSerializer;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +40,9 @@ public class Person {
 
     @JsonAnySetter
     private Map<String, String> map = new HashMap<>();
+
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime time;
 
 
 
