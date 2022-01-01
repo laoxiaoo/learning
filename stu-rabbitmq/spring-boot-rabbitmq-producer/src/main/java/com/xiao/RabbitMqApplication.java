@@ -21,7 +21,7 @@ public class RabbitMqApplication {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(RabbitMqApplication.class, args);
         rabbitTemplate = applicationContext.getBean(RabbitTemplate.class);
 
-        dlxExchangeMessageTransport();
+        directExchangeMessageTransport();
     }
 
     /**
@@ -39,6 +39,11 @@ public class RabbitMqApplication {
         rabbitTemplate.convertAndSend(RabbitmqTTLConfiguration.DIRECT_EXCHANGE,
                 RabbitmqTTLConfiguration.DIRECT_KEY, "测试过期数据...");
 
+    }
+
+    public static void directExchangeMessageTransport() {
+        rabbitTemplate.convertAndSend(RabbitmqTTLConfiguration.DIRECT_EXCHANGE,
+                "queue_03", "测试过期数据...");
     }
 
 }
