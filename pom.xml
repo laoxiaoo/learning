@@ -56,6 +56,7 @@
         <module>stu-rocketmq</module>
         <module>laoxiao-util</module>
         <module>demo-canal</module>
+        <module>demo-kafka</module>
     </modules>
 
     <properties>
