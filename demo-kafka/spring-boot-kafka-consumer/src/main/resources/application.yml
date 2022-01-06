@@ -1,0 +1,14 @@
+# 配置服务端
+server:
+  port: 8082
+
+# kafka配置
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: 192.168.1.132:9092
+      # 手动提交模式
+      enable-auto-commit: false
+    listener:
+      # listner负责ack，每调用一次，就立即commit
+      ack-mode: manual_immediate

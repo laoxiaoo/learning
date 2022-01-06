@@ -55,7 +55,12 @@
         <module>demo-spring-boot</module>
         <module>stu-rocketmq</module>
         <module>laoxiao-util</module>
+<<<<<<< HEAD
         <module>demo-log</module>
+=======
+        <module>demo-canal</module>
+        <module>demo-kafka</module>
+>>>>>>> 972ccf099cab3ea1abfe243542c5d032659fe0b7
     </modules>
 
     <properties>
@@ -206,6 +211,12 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client</artifactId>
                 <version>4.9.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.otter</groupId>
+                <artifactId>canal.client</artifactId>
+                <version>1.1.2</version>
             </dependency>
 
         </dependencies>

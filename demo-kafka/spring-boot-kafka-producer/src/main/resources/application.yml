@@ -1,0 +1,9 @@
+# 配置服务端口
+server:
+  port: 8081
+
+# Kafka配置
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: 192.168.1.132:9092

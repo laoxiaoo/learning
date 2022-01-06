@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+# rabbitmq的相关配置
+spring:
+  rabbitmq:
+    host: 192.168.1.134
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        # 更改消息的应答模式为手动应答
+        acknowledge-mode: manual
