@@ -10,7 +10,7 @@ import java.util.Map;
  *
  * 即，查询的时候，通过hash查询，  删除的时候，删除链表里的数据，
  *
- * @author xiao ji hao
+ * @author laoxiao
  * @create 2021年07月06日 00:14:00
  */
 public class LRU {
