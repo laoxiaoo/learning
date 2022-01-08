@@ -58,6 +58,7 @@
         <module>demo-log</module>
         <module>demo-canal</module>
         <module>demo-kafka</module>
+        <module>demo-sso</module>
     </modules>
 
     <properties>
