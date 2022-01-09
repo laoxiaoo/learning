@@ -59,6 +59,7 @@
         <module>demo-canal</module>
         <module>demo-kafka</module>
         <module>demo-sso</module>
+        <module>demo-mockito</module>
     </modules>
 
     <properties>
