@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
 
 /**
  * @author xiao jie
@@ -13,18 +14,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LogInterceptor implements HandlerInterceptor {
 
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        return HandlerInterceptor.super.preHandle(request, response, handler);
-    }
+    public static final String MDC_CONSTANT = "traceId";
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        MDC.put(MDC_CONSTANT, UUID.randomUUID().toString().toUpperCase());
+        return Boolean.TRUE;
     }
+
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+        MDC.remove(MDC_CONSTANT);
     }
 }
