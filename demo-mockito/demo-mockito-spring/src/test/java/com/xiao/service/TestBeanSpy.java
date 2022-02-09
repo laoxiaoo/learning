@@ -6,9 +6,11 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -17,14 +19,21 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class TestBean {
+public class TestBeanSpy {
 
-    @Mock
-    private UserManager userManager;
+    @Spy
+    private UserManager userManager = new UserManagerSpy();
 
     //如果使用InjectMocks，则 @Mock的对象会注入属性中
     @InjectMocks
     private UserServiceImpl userService;
+
+    //@MockBean
+    //private UserManagerImpl userManagerImpl;
+
+
+
+
 
 
     @Before
