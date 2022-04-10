@@ -2,9 +2,11 @@ package com.xiao.util;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +24,17 @@ public class LocalDateTimeUtil {
     public static LocalDateTime parse(String time) {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return LocalDateTime.parse(time,df);
+    }
+
+    /**
+     * 时间转为 LocalDateTime
+     * @param date
+     * @return
+     */
+    public static LocalDateTime parse(Date date) {
+        return date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
     }
 
 

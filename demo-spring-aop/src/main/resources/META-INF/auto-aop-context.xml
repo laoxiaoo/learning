@@ -9,14 +9,16 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
 ">
-    <aop:aspectj-autoproxy />
 
-    <bean id="aspectXmlConfiguration" class="com.xiao.pointcut.AspectXmlConfiguration" />
+    <bean id="echoService" class="com.xiao.service.DefaultEchoServiceImpl" />
 
-    <aop:config >
-        <aop:aspect id="AspectXmlConfiguration" ref="aspectXmlConfiguration">
-            <aop:pointcut expression="execution(public * *(..))" id="anyPublicMethod" />
-            <aop:before method="beforeMethod" pointcut-ref="anyPublicMethod" />
-        </aop:aspect>
-    </aop:config>
+    <bean id="echoMethodServiceInterceptor" class="com.xiao.pointcut.matcher.EchoMethodServiceInterceptor" />
+
+    <bean class="org.springframework.aop.framework.ProxyFactoryBean" >
+        <property name="targetName" value="echoService" />
+        <property name="interceptorNames" >
+            <value>echoMethodServiceInterceptor</value>
+        </property>
+    </bean>
+
 </beans>

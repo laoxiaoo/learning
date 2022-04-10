@@ -60,6 +60,7 @@
         <module>demo-kafka</module>
         <module>demo-sso</module>
         <module>demo-mockito</module>
+        <module>demo-spring-aop</module>
     </modules>
 
     <properties>
