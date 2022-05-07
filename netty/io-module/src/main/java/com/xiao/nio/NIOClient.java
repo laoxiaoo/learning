@@ -31,7 +31,7 @@ public class NIOClient {
                 System.out.println("客户端还未连接，不会阻塞，可以做其他事");
             }
         }
-        ByteBuffer byteBuffer = ByteBuffer.wrap("hello, 老肖".getBytes());
+        ByteBuffer byteBuffer = ByteBuffer.wrap("hello".getBytes());
         channel.write(byteBuffer);
         System.out.println("写入完毕");
         channel.close();

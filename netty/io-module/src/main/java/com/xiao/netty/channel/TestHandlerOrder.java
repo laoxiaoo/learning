@@ -40,6 +40,12 @@ public class TestHandlerOrder {
                                 ctx.channel().writeAndFlush(ctx.alloc().buffer().writeBytes("server...".getBytes()));
                             }
                         });
+                        ch.pipeline().addLast("I2",new SimpleChannelInboundHandler<Student>() {
+                            @Override
+                            protected void channelRead0(ChannelHandlerContext ctx, Student msg) throws Exception {
+
+                            }
+                        });
                         ch.pipeline().addLast("o3",new ChannelOutboundHandlerAdapter() {
                             @Override
                             public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {

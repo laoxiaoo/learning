@@ -23,8 +23,7 @@ public class Server1 {
             socketChannel.bind(new InetSocketAddress(80));
             socketChannel.configureBlocking(false);
             while (true) {
-                //log.debug("连接中....");
-                //连接的过程中是阻塞的，只有有连接了才会进行下一步操作
+                //连接的过程中不是是阻塞的
                 SocketChannel channel = socketChannel.accept();
                 if(ObjectUtil.isNotNull(channel)) {
                     log.debug("连接完成");

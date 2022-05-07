@@ -61,6 +61,14 @@ public class NIOServer {
                             key.cancel();
                         } else {
                             System.out.println("客户端传来： "+ new String(buffer.array()));
+                            //当压缩之后发现buffer没有读完
+                            buffer.capacity();
+                            if(buffer.position() == buffer.limit()) {
+                                ByteBuffer bufferTemp = ByteBuffer.allocate(buffer.capacity() * 2);
+                                //将老的buffer设置到新的buffer中
+                                bufferTemp.put(buffer);
+                                key.attach(bufferTemp);
+                            }
                         }
                     } catch (IOException e) {
                         //将当前事件消除，否则select()方法会认为这个事件还没有处理

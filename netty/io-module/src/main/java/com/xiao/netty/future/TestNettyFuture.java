@@ -21,7 +21,10 @@ public class TestNettyFuture {
             return 10;
         });
         log.debug("准备获取结果...");
-        log.debug("获取到结果 {}...", log.getName());
+        log.debug("获取到结果 {}...", future.get());
+        future.addListener(future1 -> {
+            log.debug("异步的获取结果:{}", future1.getNow());
+        });
     }
 
 }

@@ -14,7 +14,14 @@ public class TestSlice {
         buf.writeBytes(new byte[] {'a', 'b', 'c', 'd', 'e', 'f'});
         //采用切片的方式
         ByteBuf buf1 = buf.slice(0, 3);
+        //引用计数+1
+        buf1.retain();
         ByteBuf buf2 = buf.slice(3, 3);
+        //引用计数+2
+        buf2.retain();
+        buf.release();
+        buf1.release();
+        buf2.release();
     }
 
 }
