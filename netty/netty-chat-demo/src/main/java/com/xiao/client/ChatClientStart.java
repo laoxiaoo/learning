@@ -4,6 +4,8 @@ import com.xiao.client.handler.LoginHandler;
 import com.xiao.protocol.DefaultFrameDecoder;
 import com.xiao.protocol.MessageCodec;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -18,7 +20,8 @@ public class ChatClientStart {
 
     public static void main(String[] args) throws InterruptedException {
         LoggingHandler LOGGING_HANDLER = new LoggingHandler();
-        new Bootstrap()
+        NioEventLoopGroup group = new NioEventLoopGroup();
+        ChannelFuture channelFuture = new Bootstrap()
                 .group(new NioEventLoopGroup())
                 .channel(NioSocketChannel.class)
                 .handler(new ChannelInitializer<NioSocketChannel>() {
@@ -28,7 +31,16 @@ public class ChatClientStart {
                         ch.pipeline().addLast(new MessageCodec());
                         ch.pipeline().addLast(new LoginHandler());
                     }
-                }).connect("127.0.0.1", 80).sync().channel();
+                }).connect("127.0.0.1", 80);
+
+        channelFuture.addListener(new ChannelFutureListener() {
+            @Override
+            public void operationComplete(ChannelFuture future) throws Exception {
+                future.channel().close().addListener(close -> {
+                    group.shutdownGracefully();
+                });
+            }
+        });
     }
 
 }

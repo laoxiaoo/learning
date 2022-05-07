@@ -3,6 +3,7 @@ package com.xiao.server;
 import com.xiao.client.handler.LoginHandler;
 import com.xiao.protocol.DefaultFrameDecoder;
 import com.xiao.protocol.MessageCodec;
+import com.xiao.server.handler.ChatRequestHandler;
 import com.xiao.server.handler.LoginRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -20,6 +21,8 @@ public class ChatServerStart {
 
     public static void main(String[] args) throws InterruptedException {
         LoggingHandler LOGGING_HANDLER = new LoggingHandler();
+        //聊天handler
+        ChatRequestHandler CHATREQUESTHANDLER = new ChatRequestHandler();
         new ServerBootstrap()
                 .group(new NioEventLoopGroup())
                 .channel(NioServerSocketChannel.class)
@@ -30,6 +33,7 @@ public class ChatServerStart {
                         ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(new MessageCodec());
                         ch.pipeline().addLast(new LoginRequestHandler());
+                        ch.pipeline().addLast(CHATREQUESTHANDLER);
                     }
                 }).bind(80);
     }

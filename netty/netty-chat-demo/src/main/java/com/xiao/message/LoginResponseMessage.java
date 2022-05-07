@@ -11,11 +11,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class LoginResponseMessage extends Message{
-
-    private Boolean success;
-
-    private String reason;
+public class LoginResponseMessage extends AbstractResponseMessage {
 
     @Override
     public int getMessageType() {
@@ -23,8 +19,7 @@ public class LoginResponseMessage extends Message{
     }
 
     public LoginResponseMessage(Boolean success, String reason) {
-        this.reason = reason;
-        this.success = success;
+        super(success, reason);
     }
 
 }

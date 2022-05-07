@@ -2,6 +2,7 @@ package com.xiao.server.handler;
 
 import com.xiao.message.LoginRequestMessage;
 import com.xiao.message.LoginResponseMessage;
+import com.xiao.server.session.SessionFactory;
 import com.xiao.service.UserService;
 import com.xiao.service.impl.UserServiceMemoryImpl;
 import io.netty.channel.ChannelHandlerContext;
@@ -20,6 +21,8 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
         LoginResponseMessage responseMessage;
         if(login) {
             responseMessage = new LoginResponseMessage(Boolean.TRUE, null);
+            //登陆成功存储会话
+            SessionFactory.getSession().bind(ctx.channel(), msg.getUsername());
         } else {
             responseMessage = new LoginResponseMessage(Boolean.TRUE, "登录失败");
         }
