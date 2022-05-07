@@ -63,16 +63,9 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
             //jdk序列化类型
             ObjectInputStream inputStream = new ObjectInputStream(new ByteArrayInputStream(bytes));
             Message message = (Message) inputStream.readObject();
-            System.out.println(message.toString());
-        }
-    }
+            log.debug("反序列化数据：{}", message.toString());
 
-    public static void main(String[] args) {
-        EmbeddedChannel channel = new EmbeddedChannel(
-                new LoggingHandler(),
-                new MessageCodec()
-        );
-        LoginRequestMessage message = new LoginRequestMessage("laoxiao", "123456");
-        channel.writeOutbound(message);
+            out.add(message);
+        }
     }
 }

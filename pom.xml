@@ -60,11 +60,8 @@
         <module>demo-kafka</module>
         <module>demo-sso</module>
         <module>demo-mockito</module>
-<<<<<<< HEAD
         <module>demo-cache</module>
-=======
         <module>demo-spring-aop</module>
->>>>>>> f82666c40d2c7394f5642156495a46ed9dfccf4c
     </modules>
 
     <properties>
