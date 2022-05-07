@@ -7,7 +7,8 @@ package com.xiao.thread.local;
 public class TestLocalThread {
 
     public static void main(String[] args) {
-
+        TestLocalThread testLocalThread = new TestLocalThread();
+        testLocalThread.before();
     }
 
 
