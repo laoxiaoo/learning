@@ -57,6 +57,8 @@ public class CanalClient {
                 CanalEntry.RowChange rowChange = CanalEntry.RowChange.parseFrom(storeValue);
                 //获取事件类型：新增、修改等
                 CanalEntry.EventType eventType = rowChange.getEventType();
+                CanalData canalData = new CanalData();
+                canalData.setEventType(eventType);
                 //获取数据集合
                 List<CanalEntry.RowData> rowDatasList = rowChange.getRowDatasList();
                 for(CanalEntry.RowData rowData : rowDatasList) {
@@ -73,9 +75,13 @@ public class CanalClient {
                         after.put(column.getName(), column.getValue());
                     }
 
-                    System.out.println("更新前:" + beforeColumnsList.toString());
-                    System.out.println("更新后：" + afterColumnsList.toString());
+                   /* System.out.println("更新前:" + beforeColumnsList.toString());
+                    System.out.println("更新后：" + afterColumnsList.toString());*/
+
+                    canalData.getAfter().add(after);
+                    canalData.getBefore().add(before);
                 }
+                System.out.println(canalData);
             }
         } catch (Exception e ) {
 

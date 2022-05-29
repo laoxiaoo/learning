@@ -22,24 +22,19 @@ public class ChatClientStart {
         LoggingHandler LOGGING_HANDLER = new LoggingHandler();
         NioEventLoopGroup group = new NioEventLoopGroup();
         ChannelFuture channelFuture = new Bootstrap()
-                .group(new NioEventLoopGroup())
+                .group(group)
                 .channel(NioSocketChannel.class)
                 .handler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(LOGGING_HANDLER);
+                        //ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(new MessageCodec());
                         ch.pipeline().addLast(new LoginHandler());
                     }
                 }).connect("127.0.0.1", 80);
 
-        channelFuture.addListener(new ChannelFutureListener() {
-            @Override
-            public void operationComplete(ChannelFuture future) throws Exception {
-                future.channel().close().addListener(close -> {
-                    group.shutdownGracefully();
-                });
-            }
+        channelFuture.channel().closeFuture().addListener(close -> {
+            group.shutdownGracefully();
         });
     }
 

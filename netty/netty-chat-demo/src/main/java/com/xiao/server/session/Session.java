@@ -19,4 +19,11 @@ public interface Session {
      */
     Channel getChannel(String userName);
 
+    /**
+     * 通过当前channel获取当前用户
+     * @param channel
+     * @return
+     */
+    String getUser(Channel channel);
+
 }

@@ -14,9 +14,10 @@ import lombok.*;
 public class ChatRequestMessage extends Message {
 
     /**
-     * 聊天内容
+     * 来源于谁
      */
-    private String content;
+    private String from;
+
 
     /**
      * 发送给谁
@@ -24,9 +25,9 @@ public class ChatRequestMessage extends Message {
     private String to;
 
     /**
-     * 来源于谁
+     * 聊天内容
      */
-    private String from;
+    private String content;
 
     @Override
     public int getMessageType() {

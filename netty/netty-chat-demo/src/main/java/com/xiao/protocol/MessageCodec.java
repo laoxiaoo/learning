@@ -63,8 +63,7 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
             //jdk序列化类型
             ObjectInputStream inputStream = new ObjectInputStream(new ByteArrayInputStream(bytes));
             Message message = (Message) inputStream.readObject();
-            log.debug("反序列化数据：{}", message.toString());
-
+            //log.debug("反序列化数据：{}", message.toString());
             out.add(message);
         }
     }

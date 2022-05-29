@@ -1,11 +1,9 @@
 package com.xiao.client.handler;
 
-import com.xiao.message.ChatRequestMessage;
-import com.xiao.message.LoginRequestMessage;
-import com.xiao.message.LoginResponseMessage;
-import com.xiao.message.Message;
+import com.xiao.message.*;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
@@ -16,6 +14,7 @@ import java.util.concurrent.CountDownLatch;
  * @author lao xiao
  * @create 2022年05月07日 07:55:00
  */
+@Slf4j
 public class LoginHandler extends ChannelInboundHandlerAdapter {
 
     private static CountDownLatch LOGIN_CONT_DOWN_LATCH = new CountDownLatch(1);
@@ -32,22 +31,26 @@ public class LoginHandler extends ChannelInboundHandlerAdapter {
                 //登陆成功，全局设置已经成功
                 is_login = Boolean.TRUE;
             }
+            LOGIN_CONT_DOWN_LATCH.countDown();
+        } else if (message instanceof ChatResponseMessage){
+            ChatResponseMessage chatResponseMessage = (ChatResponseMessage) msg;
+            log.debug("{} 对你说： {}", chatResponseMessage.getFrom(), chatResponseMessage.getContent());
         }
-        LOGIN_CONT_DOWN_LATCH.countDown();
+
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //新启动一个线程，为了避免active阻塞影响其他线程
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入用户名:");
+        String username = scanner.nextLine();
+        System.out.println("请输入密码:");
+        String password = scanner.nextLine();
+        LoginRequestMessage loginRequestMessage = new LoginRequestMessage(username, password);
+        ctx.writeAndFlush(loginRequestMessage);
+        System.out.println("等待过程中....");
         new Thread(() -> {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("请输入用户名:");
-            String username = scanner.nextLine();
-            System.out.println("请输入密码:");
-            String password = scanner.nextLine();
-            LoginRequestMessage loginRequestMessage = new LoginRequestMessage(username, password);
-            ctx.writeAndFlush(loginRequestMessage);
-            System.out.println("等待过程中....");
             try {
                 LOGIN_CONT_DOWN_LATCH.await();
             } catch (InterruptedException e) {
@@ -81,6 +84,9 @@ public class LoginHandler extends ChannelInboundHandlerAdapter {
                     case "send":
                         ctx.writeAndFlush(new ChatRequestMessage(username, s[1], s[2]));
                         break;
+                    case "quit":
+                        ctx.channel().close();
+                        return;
                 }
             }
         }).start();

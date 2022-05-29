@@ -23,7 +23,10 @@ public class ChatRequestHandler extends SimpleChannelInboundHandler<ChatRequestM
         //获取给发给人的channel
         Channel channel = SessionFactory.getSession().getChannel(msg.getTo());
         if(Objects.nonNull(channel)) {
-            channel.writeAndFlush(new ChatResponseMessage(Boolean.TRUE, msg.getContent()));
+            ChatResponseMessage message = new ChatResponseMessage();
+            message.setContent(msg.getContent());
+            message.setFrom(SessionFactory.getSession().getUser(ctx.channel()));
+            channel.writeAndFlush(message);
         } else {
             ctx.channel().writeAndFlush(new ChatResponseMessage(Boolean.FALSE, "对方不在线"));
         }
