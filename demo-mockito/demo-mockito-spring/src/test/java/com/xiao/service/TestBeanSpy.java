@@ -24,16 +24,14 @@ public class TestBeanSpy {
     @Spy
     private UserManager userManager = new UserManagerSpy();
 
+
     //如果使用InjectMocks，则 @Mock的对象会注入属性中
     @InjectMocks
+    @Autowired
     private UserServiceImpl userService;
 
     //@MockBean
     //private UserManagerImpl userManagerImpl;
-
-
-
-
 
 
     @Before

@@ -16,11 +16,12 @@ public class DemoManagerImpl implements DemoManager {
     @Override
     public String sayHello(String name) {
         log.info("来自{} 的请求...{}", LocalDateTime.now(), name);
-        try {
-            Thread.sleep(2000);
+        /*try {
+            //Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        return "收到:"+name;
+        }*/
+        throw new RuntimeException("测试异常");
+        //return "收到:"+name;
     }
 }
