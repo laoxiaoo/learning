@@ -1,0 +1,15 @@
+<configuration>
+    <!--数据库配置信息-->
+    <dataSource>
+        <property name="driver" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:database/mybatis_h2db"/>
+        <property name="username" value="sa"/>
+        <property name="password" value="123456"/>
+    </dataSource>
+
+
+    <mappers>
+        <mapper resource="userMapper.xml"/>
+    </mappers>
+
+</configuration>

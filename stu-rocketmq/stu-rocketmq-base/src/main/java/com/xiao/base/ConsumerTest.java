@@ -28,7 +28,6 @@ public class ConsumerTest {
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         //设置消费模式：默认集群
         consumer.setMessageModel(MessageModel.CLUSTERING);
-        
         //注册监听
         consumer.registerMessageListener(new MessageListenerConcurrently() {
 

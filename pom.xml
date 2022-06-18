@@ -62,6 +62,7 @@
         <module>demo-mockito</module>
         <module>demo-cache</module>
         <module>demo-spring-aop</module>
+        <module>stu-mybatis</module>
     </modules>
 
     <properties>
