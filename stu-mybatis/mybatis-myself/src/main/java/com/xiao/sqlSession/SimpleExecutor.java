@@ -8,6 +8,7 @@ import com.xiao.util.ParameterMappingTokenHandler;
 import com.xiao.util.TokenHandler;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 /**
@@ -23,7 +24,11 @@ public class SimpleExecutor implements Executor {
         //将 select* from xxx where id =#{id} =>select* from xxx where id = ?
         BoundSql boundSql = getBoundSql(mapperStatement.getSql());
         //jdbc的执行过程
-
+        PreparedStatement preparedStatement = connection.prepareStatement(boundSql.getParseSql());
+        List<ParameterMapping> list = boundSql.getList();
+        for(ParameterMapping mapping : list) {
+            String content = mapping.getContent();
+        }
         return null;
     }
 
@@ -37,7 +42,7 @@ public class SimpleExecutor implements Executor {
         //标记处理器类
         //将 #{xxx}  转换成 ?
         ParameterMappingTokenHandler tokenHandler =  new ParameterMappingTokenHandler();
-        GenericTokenParser genericTokenParser = new GenericTokenParser("#{", "#}", tokenHandler);
+        GenericTokenParser genericTokenParser = new GenericTokenParser("#{", "}", tokenHandler);
         //解析出来后的sql
         String parseSql = genericTokenParser.parse(sql);
         //xxx的内容 即#{}中的内容
