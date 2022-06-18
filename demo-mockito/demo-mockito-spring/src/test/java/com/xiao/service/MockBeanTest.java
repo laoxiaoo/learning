@@ -28,7 +28,7 @@ public class MockBeanTest {
 
     @Test
     public void getUserInfo() {
-        cdMockito.when(deepService.getDeep(Mockito.any())).then(var -> "test spy");
+        Mockito.when(deepService.getDeep(Mockito.any())).then(var -> "test spy");
         System.out.println(userService.getUser());
     }
 }
