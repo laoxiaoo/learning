@@ -41,7 +41,6 @@ public class SubbingMockTest {
     @Test
     public void iterateSub() {
         Mockito.when(list.get(0)).thenReturn(0).thenReturn(1).thenReturn(2);
-
         System.out.println(list.get(0));
         System.out.println(list.get(0));
         System.out.println(list.get(0));

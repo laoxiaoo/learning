@@ -1,7 +1,10 @@
 package com.xiao.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 
 /**
  * @author xiao ji hao
@@ -10,8 +13,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserManagerImpl implements UserManager {
 
+    @Autowired
+    private DeepService deepService;
+
     @Override
     public String getRemoteUser() {
-        return "remoterUser";
+        return deepService.getDeep(new HashMap());
     }
+
 }
