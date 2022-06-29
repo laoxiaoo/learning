@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author 肖杰
+ * @author laoxiao
  * @version 1.
  * @ClassName HelloWordConfig.java
  * @Description TODO

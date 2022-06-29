@@ -8,3 +8,10 @@ management:
     web:
       exposure:
         include: "*"
+spring:
+  profiles:
+    active: dev
+
+
+laoxiao:
+  test: 测试环境变量
