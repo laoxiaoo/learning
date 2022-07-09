@@ -6,7 +6,7 @@ import com.xiao.HelloWordConfig;
 import java.lang.annotation.*;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.
  * @ClassName EnableHelloword.java
  * @Description TODO
