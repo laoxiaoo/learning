@@ -8,7 +8,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.EncodedResource;
 
 /**
- * @author lonely xiao
+ * @author lao xiao
  * @version 1.0
  * @ClassName PropertiesDependencyDemo.java
  * @Description

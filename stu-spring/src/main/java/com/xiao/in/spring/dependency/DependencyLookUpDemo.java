@@ -11,7 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.Map;
 
 /**
- * @author lonely xiao
+ * @author lao xiao
  * @version 1.0
  * @ClassName DependencyLookUpDemo.java
  * @Description 依赖查找demo
