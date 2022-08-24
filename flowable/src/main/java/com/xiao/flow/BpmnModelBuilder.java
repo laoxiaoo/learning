@@ -16,7 +16,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.0.0
  * @ClassName BpmnModelBuilder.java
  * @Description bpmn模型构造器

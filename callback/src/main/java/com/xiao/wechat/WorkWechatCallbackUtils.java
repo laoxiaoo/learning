@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 3.0
  * @ClassName WorkWechatCallbackUtils.java
  * @Description 企业微信回调测试类

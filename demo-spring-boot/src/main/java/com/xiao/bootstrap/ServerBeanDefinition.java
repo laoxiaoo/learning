@@ -10,7 +10,7 @@ import org.springframework.core.type.AnnotationMetadata;
 import com.xiao.server.impl.HttpServerImpl;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.
  * @ClassName ServerBeandefinition.java
  * @Description TODO

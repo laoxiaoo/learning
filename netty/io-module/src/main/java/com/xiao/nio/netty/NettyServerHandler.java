@@ -9,7 +9,7 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.util.CharsetUtil;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.0.0
  * @ClassName NettyServerHandler.java
  * @Description TODO

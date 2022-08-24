@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Scanner;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.0.0
  * @ClassName NettyClient.java
  * @Description TODO

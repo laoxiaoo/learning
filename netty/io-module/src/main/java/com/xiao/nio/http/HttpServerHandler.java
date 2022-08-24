@@ -9,7 +9,7 @@ import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.0.0
  * @ClassName HttpServerHandler.java
  * @Description HttpObject:客户端与服务器端通讯的工具封装成：HttpObject

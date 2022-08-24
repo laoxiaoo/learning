@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @ClassName IdJsonSerializer.java
  * @Description
  * @createTime 2021年03月29日 15:18:00

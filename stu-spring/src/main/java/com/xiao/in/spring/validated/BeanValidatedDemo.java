@@ -53,7 +53,7 @@ public class BeanValidatedDemo {
     @Getter
     @ToString
     static class User {
-        @NotNull
+        @NotNull(message = "不能为空")
         private String name;
 
         private Integer id;

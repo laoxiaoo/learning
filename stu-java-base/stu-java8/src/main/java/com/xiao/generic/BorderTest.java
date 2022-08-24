@@ -1,7 +1,7 @@
 package com.xiao.generic;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @ClassName BorderTest.java
  * @Description 泛型擦写边界
  * @createTime 2021年04月08日 18:00:00

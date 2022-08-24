@@ -7,7 +7,7 @@ import com.xiao.annotation.EnableServer;
 import com.xiao.server.Server;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.
  * @ClassName HelloWordBootStrap.java
  * @Description TODO

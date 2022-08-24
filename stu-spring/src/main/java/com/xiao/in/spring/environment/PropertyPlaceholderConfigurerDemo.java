@@ -13,7 +13,7 @@ import org.springframework.core.io.Resource;
 import javax.validation.Valid;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.
  * @ClassName PropertyPlaceholderConfigurerDemo.java
  * @Description TODO

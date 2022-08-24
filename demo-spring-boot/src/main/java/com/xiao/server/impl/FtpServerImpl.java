@@ -3,7 +3,7 @@ package com.xiao.server.impl;
 import com.xiao.server.Server;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.
  * @ClassName FtpServerImpl.java
  * @Description TODO

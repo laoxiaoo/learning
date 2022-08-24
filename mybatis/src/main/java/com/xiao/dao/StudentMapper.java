@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.2.8
  * @ClassName StudentMapper.java
  * @Description 学生接口

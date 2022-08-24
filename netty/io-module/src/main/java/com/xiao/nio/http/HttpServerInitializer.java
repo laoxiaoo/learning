@@ -7,7 +7,7 @@ import io.netty.handler.codec.http.HttpServerCodec;
 
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.0.0
  * @ClassName HttpServerInitializer.java
  * @Description 在某个Channel注册到EventLoop后，对这个Channel执行一些初始化操作

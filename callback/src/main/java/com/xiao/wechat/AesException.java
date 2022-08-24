@@ -1,7 +1,7 @@
 package com.xiao.wechat;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 3.0
  * @ClassName AesException.java
  * @Description

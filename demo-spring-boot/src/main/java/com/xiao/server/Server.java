@@ -1,7 +1,7 @@
 package com.xiao.server;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.
  * @ClassName Server.java
  * @Description TODO

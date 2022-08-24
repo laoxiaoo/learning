@@ -8,7 +8,7 @@ import com.xiao.server.Server;
 import java.lang.annotation.*;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.
  * @ClassName EnableServer.java
  * @Description TODO

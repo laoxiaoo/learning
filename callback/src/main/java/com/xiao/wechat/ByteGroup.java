@@ -3,7 +3,7 @@ package com.xiao.wechat;
 import java.util.ArrayList;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 3.0
  * @ClassName ByteGroup.java
  * @Description
