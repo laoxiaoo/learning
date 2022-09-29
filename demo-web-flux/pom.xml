@@ -14,6 +14,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>demo-rx-java</module>
+        <module>demo-web-function</module>
     </modules>
 
     <properties>
