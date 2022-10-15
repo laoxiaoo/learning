@@ -7,7 +7,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.0.0
  * @ClassName NettyServer.java
  * @Description TODO

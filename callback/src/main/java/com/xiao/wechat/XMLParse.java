@@ -10,7 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.StringReader;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 3.0
  * @ClassName XMLParse.java
  * @Description

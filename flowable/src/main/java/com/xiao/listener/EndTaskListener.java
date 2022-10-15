@@ -6,7 +6,7 @@ import org.flowable.task.service.delegate.TaskListener;
 import org.springframework.stereotype.Component;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.2.8
  * @ClassName EndTaskListener.java
  * @Description

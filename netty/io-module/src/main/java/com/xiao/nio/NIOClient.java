@@ -9,7 +9,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.0.0
  * @ClassName NIOClient.java
  * @Description TODO

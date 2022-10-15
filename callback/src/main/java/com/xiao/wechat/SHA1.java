@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.util.Arrays;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 3.0
  * @ClassName SHA1.java
  * @Description

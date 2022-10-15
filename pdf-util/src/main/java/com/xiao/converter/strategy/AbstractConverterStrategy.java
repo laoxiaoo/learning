@@ -6,7 +6,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @ClassName AbstractConverterStrategy.java
  * @Description
  * @createTime 2021年04月07日 10:27:00

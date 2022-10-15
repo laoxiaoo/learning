@@ -63,6 +63,7 @@
         <module>demo-cache</module>
         <module>demo-spring-aop</module>
         <module>stu-mybatis</module>
+        <module>demo-web-flux</module>
     </modules>
 
     <properties>

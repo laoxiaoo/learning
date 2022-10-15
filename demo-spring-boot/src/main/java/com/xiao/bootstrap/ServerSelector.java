@@ -11,7 +11,7 @@ import com.xiao.server.impl.HttpServerImpl;
 import java.util.Map;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.
  * @ClassName ServerSelector.java
  * @Description TODO

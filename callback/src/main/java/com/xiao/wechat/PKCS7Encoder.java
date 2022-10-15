@@ -5,7 +5,7 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 3.0
  * @ClassName PKCS7Encoder.java
  * @Description

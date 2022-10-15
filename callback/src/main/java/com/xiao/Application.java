@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.2.8
  * @ClassName Application.java
  * @Description TODO

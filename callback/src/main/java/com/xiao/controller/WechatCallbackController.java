@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 1.
  * @ClassName WechatCallbackController.java
  * @Description TODO

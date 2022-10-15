@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @ClassName Application.java
  * @Description
  * @createTime 2021年04月06日 11:03:00

@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @version 3.0
  * @ClassName WXBizMsgCrypt.java
  * @Description

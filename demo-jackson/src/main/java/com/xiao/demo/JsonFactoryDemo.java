@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.ByteArrayOutputStream;
 
 /**
- * @author 肖杰
+ * @author lao xiao
  * @ClassName JsonFactoryDemo.java
  * @Description
  * @createTime 2021年03月26日 16:04:00
