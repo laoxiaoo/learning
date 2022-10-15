@@ -9,6 +9,8 @@ import java.util.Map;
  * @author xiao jie
  * @create 2022年06月16日 15:08:00
  */
+@Service
+@Primary
 public class SpyDeepServiceImpl implements DeepService {
     @Override
     public String getDeep(Map map) {

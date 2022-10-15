@@ -23,11 +23,13 @@ public class QualifierDependencyDemo {
 
     @Autowired
     @Qualifier
-    private List<Person> persons2;
+    private List<Person> person;
 
+/*
     @Autowired
     @GroupBean
     private List<Person> persons3;
+*/
 
 
     public static void main(String[] args) {
@@ -39,9 +41,9 @@ public class QualifierDependencyDemo {
         //person person1 person2
         System.out.println(bean.persons);
         //person2, person3
-        System.out.println(bean.persons2);
+        System.out.println(bean.person);
         //person3
-        System.out.println(bean.persons3);
+        //System.out.println(bean.persons3);
         applicationContext.close();
     }
 
@@ -61,10 +63,10 @@ public class QualifierDependencyDemo {
         return new Person(2);
     }
 
-    @Bean
-    @GroupBean
-    public Person person3() {
-        return new Person(3);
-    }
+//    @Bean
+//    @GroupBean
+//    public Person person3() {
+//        return new Person(3);
+//    }
 
 }

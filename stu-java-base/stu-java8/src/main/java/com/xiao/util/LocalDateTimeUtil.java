@@ -115,7 +115,7 @@ public class LocalDateTimeUtil {
      * @param end
      * @return
      */
-    public static Long getLegthDays(LocalDateTime start, LocalDateTime end) {
+    public static Long getLengthDays(LocalDateTime start, LocalDateTime end) {
         Duration between = Duration.between(start, end);
         return between.toDays();
     }

@@ -1,6 +1,7 @@
 package com.xiao.in.spring.xml;
 
 import com.xiao.aop.cglib.Person;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
