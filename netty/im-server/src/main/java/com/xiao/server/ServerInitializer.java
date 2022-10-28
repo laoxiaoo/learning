@@ -1,5 +1,8 @@
 package com.xiao.server;
 
+import com.xiao.handler.BaseResponseHandler;
+import com.xiao.handler.CommonChatHandler;
+import com.xiao.handler.LoginRequestHandler;
 import com.xiao.handler.WebSocketFrameHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -35,6 +38,9 @@ public class ServerInitializer extends ChannelInitializer<SocketChannel> {
                 //是通过一个状态码 101
                 .addLast("WebSocketServerProtocolHandler",new WebSocketServerProtocolHandler("/ws"))
                 //自定义的handler做业务逻辑处理
-                .addLast(new WebSocketFrameHandler());
+                .addLast(new WebSocketFrameHandler())
+                .addLast(new BaseResponseHandler())
+                .addLast(new LoginRequestHandler())
+                .addLast(new CommonChatHandler());
     }
 }

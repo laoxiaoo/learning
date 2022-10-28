@@ -10,11 +10,12 @@
     //判断当前浏览器是否支持websocket
     if(window.WebSocket) {
         //go on
-        socket = new WebSocket("ws://127.0.0.1:7000/hello");
+        socket = new WebSocket("ws://127.0.0.1:90/ws");
         //相当于channelReado, ev 收到服务器端回送的消息
         socket.onmessage = function (ev) {
             var rt = document.getElementById("responseText");
-            rt.value = rt.value + "\n" + ev.data;
+            var obj = JSON.parse(ev.data)
+            rt.value = rt.value + "\n" + obj.msg;
             console.log(rt)
         }
  
@@ -37,21 +38,39 @@
     }
  
     //发送消息到服务器
-    function send(message) {
+    function send(to, message) {
+        var obj = {
+            "to": to,
+            "msg":message
+        }
+        sendMsg(1, obj)
+    }
+
+    function sendMsg(type, msg) {
         if(!window.socket) { //先判断socket是否创建好
             return;
         }
         if(socket.readyState == WebSocket.OPEN) {
             //通过socket 发送消息
-            socket.send(message)
+            socket.send(type+"&&"+ JSON.stringify(msg))
         } else {
             alert("连接没有开启");
         }
     }
+
+    function login(username) {
+        sendMsg(0, {"username":username})
+    }
 </script>
     <form onsubmit="return false">
-        <textarea name="message" style="height: 300px; width: 300px"></textarea>
-        <input type="button" value="发生消息" onclick="send(this.form.message.value)">
+        <input type="text"  name="username"  style="height: 20px; width: 300px" />
+        <input type="button" value="登录" onclick="login(this.form.username.value)">
+        <p>
+        发送给：<input type="text" name="to" style="height: 20px; width: 100px" />
+        <p></p>
+        <textarea name="message" style="height: 100px; width: 290px"></textarea>
+        <input type="button" value="发生消息" onclick="send(this.form.to.value, this.form.message.value)">
+        </p>
         <textarea id="responseText" style="height: 300px; width: 300px"></textarea>
         <input type="button" value="清空内容" onclick="document.getElementById('responseText').value=''">
     </form>
