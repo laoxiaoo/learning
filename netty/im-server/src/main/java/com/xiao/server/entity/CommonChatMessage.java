@@ -13,6 +13,8 @@ import lombok.ToString;
 @ToString
 public class CommonChatMessage extends BaseRequest{
 
+    private String source;
+
     private String to;
 
     private String msg;

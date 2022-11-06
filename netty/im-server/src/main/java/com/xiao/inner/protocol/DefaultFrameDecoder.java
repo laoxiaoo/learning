@@ -1,4 +1,4 @@
-package com.xiao.protocol;
+package com.xiao.inner.protocol;
 
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
