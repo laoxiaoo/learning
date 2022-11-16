@@ -1,10 +1,15 @@
 package com.xiao.util;
 
+import cn.hutool.core.collection.CollUtil;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author lao xiao
@@ -116,6 +121,16 @@ public class BigDecimalTest {
         BigDecimal b1 = new BigDecimal(1);
         BigDecimal b2 = new BigDecimal(2);
         System.out.println(b1.subtract(b2));
+    }
+
+
+    @Test
+    public  void test() {
+        List<Integer> list = CollUtil.newArrayList(1, 2, 3, 4, 5,6,7);
+        if(list.size() > 5) {
+            list = list.stream().limit(5).collect(Collectors.toList());
+        }
+        System.out.println(list);
     }
 
 }

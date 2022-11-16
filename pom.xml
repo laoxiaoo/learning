@@ -71,7 +71,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <slf4j-api.version>1.7.26</slf4j-api.version>
-        <hutool.version>5.3.10</hutool.version>
+        <hutool.version>5.4.1</hutool.version>
         <netty.version>4.1.51.Final</netty.version>
         <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
         <elasticsearch.version>7.9.2</elasticsearch.version>
