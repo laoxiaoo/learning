@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -28,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @RestController
 @Slf4j
-public class SecondsKillController {
+public class ErrorSecondsKillController {
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -63,12 +61,17 @@ public class SecondsKillController {
     }
 
     @GetMapping("/getNumber")
-    public void getNumber() {
+    public Map getNumber() {
+        Map map = new HashMap();
+        map.put("申请抢购", sendUserNumber);
         log.debug("申请抢购： {}", sendUserNumber);
+        map.put("抢购成功", getUserNumber);
         log.debug("抢购成功： {}", getUserNumber);
-
+        map.put("库存", redisTemplate.opsForValue().get("px:inventory"));
         log.debug("库存： {}", redisTemplate.opsForValue().get("px:inventory"));
+        map.put("用户大小", redisTemplate.opsForSet().size("px:user"));
         log.debug("用户大小： {}", redisTemplate.opsForSet().size("px:user"));
+        return map;
     }
 
     @PostMapping("/clear")

@@ -3,23 +3,19 @@ package com.xiao.controller;
 import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.ReturnType;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.xiao.controller.SecondsKillController.getUserNumber;
-import static com.xiao.controller.SecondsKillController.sendUserNumber;
+import static com.xiao.controller.ErrorSecondsKillController.getUserNumber;
+import static com.xiao.controller.ErrorSecondsKillController.sendUserNumber;
 
 /**
  *
@@ -40,10 +36,6 @@ public class LuaSecondsKillController {
     @PostMapping("/secondsKill")
     public void secondsKill() {
         sendUserNumber.incrementAndGet();
-        String num = (String) redisTemplate.opsForValue().get("px:inventory");
-        if( new Long(num)<=0) {
-            return;
-        }
         String userId = IdUtil.simpleUUID();
         String lua = "local num = redis.call('get', KEYS[1])\n" +
                 "if tonumber(num) <= 0 then\n" +
@@ -60,6 +52,8 @@ public class LuaSecondsKillController {
                     "px:user".getBytes(StandardCharsets.UTF_8),
                     userId.getBytes(StandardCharsets.UTF_8));
         });
+        //发送mq消息，转入订单流程
+
         //log.debug("==> redis call {}", obj);
         Optional.ofNullable(obj).map(var -> (List<Long>) var)
                 .filter(var -> var.size()>0)
