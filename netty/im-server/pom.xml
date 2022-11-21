@@ -7,7 +7,13 @@
         <groupId>com.xiao</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+    <modules>
+        <module>im-server-inner</module>
+        <module>im-server-outer</module>
+        <module>im-server-common</module>
+        <module>im-server-api</module>
+    </modules>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>im-server</artifactId>

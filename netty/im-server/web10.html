@@ -23,12 +23,12 @@
         socket.onopen = function (ev) {
             var rt = document.getElementById("responseText");
             rt.value = "连接开启了.."
-            console.log(rt)
+            console.log(rt);
+            login(1);
         }
  
         //相当于连接关闭(感知到连接关闭)
         socket.onclose = function (ev) {
- 
             var rt = document.getElementById("responseText");
             rt.value = rt.value + "\n" + "连接关闭了.."
             console.log(rt)
@@ -63,8 +63,6 @@
     }
 </script>
     <form onsubmit="return false">
-        <input type="text"  name="username"  style="height: 20px; width: 300px" />
-        <input type="button" value="登录" onclick="login(this.form.username.value)">
         <p>
         发送给：<input type="text" name="to" style="height: 20px; width: 100px" />
         <p></p>

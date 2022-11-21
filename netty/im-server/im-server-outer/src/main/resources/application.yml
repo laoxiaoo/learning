@@ -1,0 +1,10 @@
+chat:
+  outer:
+    port: 10
+  inner:
+    port: 100
+
+
+spring:
+  redis:
+    host: 127.0.0.1
