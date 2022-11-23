@@ -1,5 +1,6 @@
 package com.xiao.inner.server;
 
+import com.xiao.inner.handler.InnerExceptionHandler;
 import com.xiao.inner.handler.InnerRequestHandler;
 import com.xiao.inner.protocol.DefaultFrameDecoder;
 import com.xiao.inner.protocol.MessageCodec;
@@ -30,7 +31,8 @@ public class InnerServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new IdleStateHandler(5, 0, 0 ));
+                        ch.pipeline()
+                                .addLast(new IdleStateHandler(5, 0, 0 ));
                         ch.pipeline().addLast(new ChannelDuplexHandler() {
                             @Override
                             public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
@@ -44,7 +46,7 @@ public class InnerServer {
                         });
                         ch.pipeline().addLast(new DefaultFrameDecoder());
                         ch.pipeline().addLast(new MessageCodec());
-                        ch.pipeline().addLast(CHATREQUESTHANDLER);
+                        ch.pipeline().addLast(CHATREQUESTHANDLER).addLast(new InnerExceptionHandler());
                     }
                 }).bind(port);
     }

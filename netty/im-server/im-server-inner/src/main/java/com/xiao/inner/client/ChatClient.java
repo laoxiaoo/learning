@@ -3,6 +3,7 @@ package com.xiao.inner.client;
 import cn.hutool.core.util.StrUtil;
 import com.xiao.entity.BaseRequest;
 import com.xiao.inner.client.handler.InnerClientHandler;
+import com.xiao.inner.handler.InnerExceptionHandler;
 import com.xiao.inner.protocol.MessageCodec;
 import com.xiao.util.chat.factory.SessionFactory;
 import com.xiao.util.chat.factory.SpringFactory;
@@ -41,7 +42,7 @@ public class ChatClient extends AbstractChatClient {
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         //ch.pipeline().addLast(LOGGING_HANDLER);
                         ch.pipeline().addLast(new MessageCodec());
-                        ch.pipeline().addLast(new InnerClientHandler());
+                        ch.pipeline().addLast(new InnerClientHandler()).addLast(new InnerExceptionHandler());
                     }
                 }).connect(ip, port);
         Channel channel = channelFuture.channel();
