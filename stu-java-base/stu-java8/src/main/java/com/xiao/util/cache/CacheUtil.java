@@ -2,7 +2,6 @@ package com.xiao.util.cache;
 
 import cn.hutool.core.lang.func.Func;
 import cn.hutool.extra.spring.SpringUtil;
-import com.xiao.util.collections.Streams;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -92,7 +91,7 @@ public class CacheUtil {
         List<R> recList = new ArrayList(ids.size());
         //db存在的id
         List<T> dbIds = new ArrayList<>(ids.size());
-        ICache cache = SpringUtil.getBean(ICache.class);
+        ICache cache = null; //SpringUtil.getBean(ICache.class);
         for(T id : ids) {
             String str = cache.getString(keyFunction.apply(id));
             if(Objects.nonNull(str) && !NULL_OBJECT.equals(str)) {
