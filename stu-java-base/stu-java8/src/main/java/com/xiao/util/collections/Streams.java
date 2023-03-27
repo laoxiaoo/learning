@@ -4,6 +4,7 @@ package com.xiao.util.collections;
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -115,6 +116,7 @@ public class Streams {
         return data.stream().map(function::apply).collect(Collectors.toSet());
     }
 
+
     /**
      * 筛选某个字段集合
      * @param data
@@ -124,7 +126,21 @@ public class Streams {
      * @return
      */
     public static <T, R> List<R> screenField(Collection<T> data, Function<? super T, ? extends R> screen) {
-        return data.stream().map(screen).filter(Objects::nonNull).collect(Collectors.toList());
+        return screenField(data, Objects::nonNull, screen);
     }
+
+    /**
+     * 刷选某个字段集合
+     * @param data
+     * @param predicate
+     * @param screen
+     * @param <T>
+     * @param <R>
+     * @return
+     */
+    public static <T, R> List<R> screenField(Collection<T> data, Predicate<? super R> predicate, Function<? super T, ? extends R> screen) {
+        return data.stream().map(screen).filter(predicate::test).collect(Collectors.toList());
+    }
+
 
 }

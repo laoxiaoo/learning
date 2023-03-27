@@ -141,10 +141,10 @@ public class BigDecimalTest {
         double jhs = 900;
         System.out.println("海盗6 ："+(130*ls+20*xs+5400)/100);
         System.out.println("愤怒6 ："+ (170*ls+20*xs+7200)/100);
-        System.out.println("恶女6 ："+(70*ls+20*xs+2500)/100);
-        System.out.println("武士6 ："+ (170*ls+20*xs+6600)/100);
+        System.out.println("恶女6 ："+(70*ls+20*xs+2500)/100 * 3);
+        System.out.println("武士6 ："+ (170*ls+20*xs+6600)/100 *2);
         System.out.println("暗影1： " + (220*ls+9*jhs+9200)/100);
-        System.out.println("总计： " + ((70*ls+20*xs+2500)+(170*ls+20*xs+6600)+(220*ls+9*jhs+9200))/100);
+        System.out.println("总计： " + ((130*ls+20*xs+5400) + (170*ls+20*xs+7200)+ (70*ls+20*xs+2500)*3+(170*ls+20*xs+6600)*3+(220*ls+9*jhs+9200)*3)/100);
     }
 
 }
