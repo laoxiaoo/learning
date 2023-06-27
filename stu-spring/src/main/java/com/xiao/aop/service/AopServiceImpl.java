@@ -1,5 +1,6 @@
 package com.xiao.aop.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,6 +9,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AopServiceImpl implements AopService {
+
+    @Autowired
+    private CircularBean circularBean;
+
     @Override
     public void sayHello() {
         System.out.println("hello");

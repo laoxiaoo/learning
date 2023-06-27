@@ -80,4 +80,18 @@ public class BigDecimals {
         return b1.compareTo(b2);
     }
 
+    /**
+     * 获取小数长度
+     * @param bigDecimal
+     * @return
+     */
+    public static int getDecimalLength(BigDecimal bigDecimal) {
+        String balanceStr = bigDecimal.toString();
+        int indexOf = balanceStr.indexOf(".");
+        if(indexOf>0) {
+            return balanceStr.length() - 1 - indexOf;
+        }
+        return 0;
+    }
+
 }

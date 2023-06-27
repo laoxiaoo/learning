@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -146,5 +147,22 @@ public class BigDecimalTest {
         System.out.println("暗影1： " + (220*ls+9*jhs+9200)/100);
         System.out.println("总计： " + ((130*ls+20*xs+5400) + (170*ls+20*xs+7200)+ (70*ls+20*xs+2500)*3+(170*ls+20*xs+6600)*3+(220*ls+9*jhs+9200)*3)/100);
     }
+
+
+    @Test
+    public void test5() {
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
+        System.out.println(decimalFormat.format((5/ (float) 9) * 100));
+
+        System.out.println(800170703%512);
+    }
+
+    @Test
+    public void test6() {
+        int decimalLength = BigDecimals.getDecimalLength(BigDecimal.valueOf(10.002f));
+        System.out.println(decimalLength);
+    }
+
 
 }

@@ -22,9 +22,9 @@ public class LoaderAopBean {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(LoaderAopBean.class);
         context.refresh();
-        /*AopService aopService = context.getBean(AopService.class);
+        AopService aopService = context.getBean(AopService.class);
 
-        aopService.sayHello();*/
+        aopService.sayHello();
         HelloService bean = (HelloService) context.getBean("proxyBean");
         bean.sayHello();
         context.close();

@@ -39,6 +39,7 @@ public class TestAQS {
             protected boolean tryAcquire(int arg) {
                 //尝试加锁，
                 if(compareAndSetState(0, arg)) {
+                    //设置锁拥有的线程为当前线程
                     setExclusiveOwnerThread(Thread.currentThread());
                     return true;
                 }
