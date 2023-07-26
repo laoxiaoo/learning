@@ -94,4 +94,40 @@ public class BigDecimals {
         return 0;
     }
 
+    /**
+     * 分转元
+     * @param bigDecimal
+     * @return
+     */
+    public static long convertYuan(BigDecimal bigDecimal) {
+        return bigDecimal.multiply(BigDecimal.valueOf(100)).setScale(0, BigDecimal.ROUND_DOWN).longValue();
+    }
+
+    /**
+     * 分转元
+     * @param value
+     * @return
+     */
+    public static long convertYuan(String value) {
+        return new BigDecimal(value).multiply(BigDecimal.valueOf(100)).setScale(0, BigDecimal.ROUND_DOWN).longValue();
+    }
+
+    /**
+     * 元转分
+     * @param value
+     * @return
+     */
+    public static String couvertFenStr(Long value) {
+        return couvertFen(value).toString();
+    }
+
+    /**
+     * 元转分
+     * @param value
+     * @return
+     */
+    public static BigDecimal couvertFen(Long value) {
+        return new BigDecimal(value).divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_DOWN);
+    }
+
 }

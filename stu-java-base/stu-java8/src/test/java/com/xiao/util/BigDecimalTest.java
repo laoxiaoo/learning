@@ -164,5 +164,10 @@ public class BigDecimalTest {
         System.out.println(decimalLength);
     }
 
+    @Test
+    public void  test7() {
+        System.out.println(BigDecimals.convertYuan("876767.18632"));
+    }
+
 
 }
