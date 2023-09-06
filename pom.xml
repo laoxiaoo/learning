@@ -64,6 +64,8 @@
         <module>demo-spring-aop</module>
         <module>stu-mybatis</module>
         <module>demo-web-flux</module>
+        <module>demo-ddd</module>
+        <module>mybatis-xj</module>
     </modules>
 
     <properties>

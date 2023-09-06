@@ -1,4 +1,4 @@
-package com.marsplan.service.base;
+package com.xiao.util;
 
 import com.baomidou.mybatisplus.core.enums.SqlMethod;
 import com.baomidou.mybatisplus.core.toolkit.ExceptionUtils;
