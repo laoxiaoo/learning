@@ -36,6 +36,10 @@
             <artifactId>spring-tx</artifactId>
             <version>5.2.6.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

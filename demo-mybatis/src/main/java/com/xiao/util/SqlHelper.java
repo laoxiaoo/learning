@@ -58,7 +58,6 @@ public class SqlHelper {
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
     public static <T> boolean saveBatch(Collection<T> entityList, int batchSize, Class<T> tClass) {
         String sqlStatement = sqlStatement(SqlMethod.INSERT_ONE, tClass);
         int size = entityList.size();
@@ -75,8 +74,6 @@ public class SqlHelper {
         return true;
     }
 
-
-    @Transactional(rollbackFor = Exception.class)
     public static <T> boolean saveBatch(Collection<T> entityList,Class<T> tClass) {
         return saveBatch(entityList, 1000, tClass);
     }
