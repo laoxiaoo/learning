@@ -79,6 +79,7 @@
         <elasticsearch.version>7.9.2</elasticsearch.version>
         <flowable.version>6.5.0</flowable.version>
         <springfox.swagger.version>3.0.0</springfox.swagger.version>
+        <jedis.version>2.9.3</jedis.version>
     </properties>
 
     <dependencyManagement>

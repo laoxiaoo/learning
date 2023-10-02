@@ -1,4 +1,4 @@
-package com.xiao.util;
+package com.xiao.sql;
 
 import com.baomidou.mybatisplus.core.enums.SqlMethod;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
@@ -9,14 +9,18 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.MyBatisExceptionTranslator;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
- * @author xiao jie
+ * 对mybatis plus的拓展，使用着需要引入mybatisplus相关的包
+ *
+ * 传统的plus对sql的相关批量操作，是通过父类的方式实现的，
+ * 该工具类将期改为static方法的调用方式
+ *
+ * @author lx
  * @date 2023-07-21 09:42
  */
 public class SqlHelper {
