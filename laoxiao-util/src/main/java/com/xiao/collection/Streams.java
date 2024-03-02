@@ -6,6 +6,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Stream流操作工具类
@@ -142,6 +143,48 @@ public class Streams {
             return Collections.emptyList();
         }
         return data.stream().map(screen).filter(predicate::test).collect(Collectors.toList());
+    }
+
+    /**
+     * 内存分页
+     * @param data
+     * @param index
+     * @param pageSize
+     * @return
+     * @param <T>
+     */
+    public static <T> List<T> page(Collection<T> data, Integer index, Integer pageSize) {
+        if (Objects.isNull(data)) {
+            return Collections.emptyList();
+        }
+        return data.stream()
+                .skip((long) (index - 1) * pageSize) // 跳过前面的元素
+                .limit(pageSize) // 限制获取指定数量的元素
+                .collect(Collectors.toList()); // 将结果收集为新的列表
+    }
+
+
+    /**
+     * flatmap 空处理
+     * @param data
+     * @param mapper
+     * @return
+     * @param <T>
+     * @param <R>
+     */
+    public static <T, R> Stream<R> flatMapOfNull(Collection<T> data, Function<T, R> mapper) {
+        if (data == null || data.isEmpty()) {
+            return Stream.empty();
+        }
+        return data.stream().map(mapper);
+    }
+
+
+    public static <T> Stream<T> flatMapOfNull(Collection<T> data) {
+        if (data == null || data.isEmpty()) {
+            return Stream.empty();
+        }
+        return data.stream();
     }
 
 }

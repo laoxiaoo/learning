@@ -37,6 +37,10 @@ public class LuaSecondsKillController {
     public void secondsKill() {
         sendUserNumber.incrementAndGet();
         String userId = IdUtil.simpleUUID();
+
+        //px:user ---------> 存储抢票成功的用户
+        //px:inventory -----------> 库存
+
         String lua = "local num = redis.call('get', KEYS[1])\n" +
                 "if tonumber(num) <= 0 then\n" +
                 "\treturn -1\n" +

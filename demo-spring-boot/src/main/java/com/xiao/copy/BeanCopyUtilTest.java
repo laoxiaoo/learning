@@ -41,6 +41,11 @@ public class BeanCopyUtilTest {
         ItemBO itemBOCopy3 = BeanCopyUtilProxy.copyDeep(itemBO, ItemBO.class);
         System.out.println(itemBOCopy3.hashCode() + "==" + itemBOCopy3.getItemSkus().hashCode());
         itemBOCopy3.getItemSkus().forEach(var -> System.out.println(var.hashCode()));
+
+
+        ItemDetailRO itemBOCopy5 = BeanCopyUtilProxy.copy(itemBO, ItemDetailRO.class);
+        System.out.println(itemBOCopy5.hashCode() + "==" + itemBOCopy5.getItemSkus().hashCode());
+        itemBOCopy5.getItemSkus().forEach(var -> System.out.println(var.hashCode()));
     }
 
 }
