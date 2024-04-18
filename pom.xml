@@ -66,6 +66,7 @@
         <module>demo-web-flux</module>
         <module>demo-ddd</module>
         <module>mybatis-xj</module>
+        <module>lucene</module>
     </modules>
 
     <properties>
