@@ -19,7 +19,7 @@ public class RedisPageUtil {
      * 根据lrange命令进行分页
      * @param pageIndex
      * @param pageSize
-     * @param biFunction
+     * @param biFunction  执行函数，  (index stop) -> lrange key index stop
      * @return
      * @param <R>
      */

@@ -4,11 +4,14 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author xiao jie
  * @create 2021年10月20日 16:10:00
  */
+
+@Slf4j
 public class JacksonUtil {
 
     private static ObjectMapper mapper ;
@@ -53,6 +56,15 @@ public class JacksonUtil {
         } catch (Exception e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    public <T> T convertValue(Object fromValue, Class<T> toValueType) {
+        try {
+            return mapper.convertValue(fromValue, toValueType);
+        } catch (Exception e) {
+            log.error("invoke convertValue error {},", fromValue, e);
+        }
+        return null;
     }
 
 
