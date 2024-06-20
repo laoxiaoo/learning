@@ -107,10 +107,9 @@ public class LocalDateTimeUtil {
         return between.toDays();
     }
 
-    public static void main(String[] args) {
-        List<LocalDateTime> betweenMounth = getBetweenMounth(LocalDateTime.of(2021, 11, 16, 0, 0),
-                LocalDateTime.of(2021, 11, 20, 0, 0));
-        System.out.println(betweenMounth);
+
+    public static Integer getMonthInt(LocalDateTime time) {
+        return Integer.valueOf(time.format(DateTimeFormatter.ofPattern("yyyyMMdd")));
     }
 
 }
