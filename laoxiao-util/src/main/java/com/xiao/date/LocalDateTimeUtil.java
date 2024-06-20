@@ -2,10 +2,13 @@ package com.xiao.date;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -107,9 +110,27 @@ public class LocalDateTimeUtil {
         return between.toDays();
     }
 
-
+    /**
+     * 获取yyyyMMdd
+     * @param time
+     * @return
+     */
     public static Integer getMonthInt(LocalDateTime time) {
         return Integer.valueOf(time.format(DateTimeFormatter.ofPattern("yyyyMMdd")));
     }
+
+    /**
+     *
+     * @param localDateTime
+     * @return
+     */
+    public static Date asDate(LocalDateTime localDateTime) {
+        if(Objects.isNull(localDateTime)) {
+            return null;
+        }
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+
 
 }
