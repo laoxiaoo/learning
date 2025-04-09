@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
 public class TestCompletableFuture {
 
     public static void main(String[] args) {
-        CompletableFuture.runAsync()
+       // CompletableFuture.runAsync()
     }
 
 }

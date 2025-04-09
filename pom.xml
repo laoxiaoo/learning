@@ -67,6 +67,7 @@
         <module>demo-ddd</module>
         <module>mybatis-xj</module>
         <module>lucene</module>
+        <module>stu-io</module>
     </modules>
 
     <properties>
